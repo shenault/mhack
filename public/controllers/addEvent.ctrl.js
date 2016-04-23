@@ -14,6 +14,10 @@
 					$mdSidenav('addEventSideNav').close();
 				};
 
+				$scope.save = function() {
+					$scope.close();
+				}
+
 				$scope.setupScope = function() {
 					var ref = new Firebase("https://mhack-gaubey.firebaseio.com/item");
 					$scope.images = $firebaseArray(ref);
@@ -50,13 +54,13 @@
 					$scope.latGps = $scope.getGPSDecimal($scope.latGps, $scope.latGpsRef);
 					if ($scope.latGps) $scope.lat = $scope.latGps;
 					return $scope.lat;
-				}
+				};
 
 				$scope.getLng = function() {
 					$scope.lngGps = $scope.getGPSDecimal($scope.lngGps, $scope.lngGpsRef);
 					if ($scope.lngGps) $scope.lng = $scope.lngGps;
 					return $scope.lng;
-				}
+				};
 
 				$scope.getGPSDecimal = function(coordinate, ref) {
 					if (coordinate) {

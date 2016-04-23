@@ -1,19 +1,44 @@
-<div class="container">
+<div class="container" ng-controller="AddEventController">
 	<ng-map id="map" center="{{lat}}, {{lng}}" styles="{{ styles }}"></ng-map>
 	<div>{{'title' | translate}} {{label}}</div>
 
 	<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="addEventSideNav">
 		<md-toolbar class="md-theme-light">
-			<h1 class="md-toolbar-tools">{{'addEvent' | translate}}</h1>
+			<div class="md-toolbar-tools">
+				<md-button class="md-icon-button" aria-label="{{'back' | translate}}" ng-click="close()">
+					<md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+				</md-button>
+				<h2>
+					<span>{{'addEvent' | translate}}</span>
+				</h2>
+				<span flex></span>
+				<md-button class="md-icon-button" aria-label="{{'save' | translate}}" ng-click="save()">
+					<md-icon md-svg-icon="content:ic_save_24px"></md-icon>
+				</md-button>
+			</div>
 		</md-toolbar>
 		<md-content ng-controller="AddEventController" layout-padding layout-column>
 			<form>
-				so much WOW
+				<md-input-container>
+					<label>{{'type' | translate}}</label>
+					<md-select ng-model="event.type">
+						<md-option ng-repeat="type in ctrl.typeList" value="{{type.uuid}}" ng-disabled="$index === 1">
+							{{language == 'fr'  ? type.descriptionFr : type.descriptionEn }}
+						</md-option>
+					</md-select>
+				</md-input-container>
 				<button type="file" ngf-select="uploadFile($file, $invalidFiles)"
 						accept="image/*" ngf-max-size="10MB">{{'uploadImage' | translate}}</button>
+				<md-input-container class="md-block">
+					<label>{{'description' | translate}}</label>
+					<textarea ng-model="event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+				</md-input-container>
 			</form>
-			<md-button ng-click="close()" class="md-primary">
-				{{'close' | translate}}
+			<div>
+				<span>{{'location' | translate}} : TODO</span>
+			</div>
+			<md-button ng-click="save()" class="md-primary">
+				{{'save' | translate}}
 			</md-button>
 		</md-content>
 	</md-sidenav>

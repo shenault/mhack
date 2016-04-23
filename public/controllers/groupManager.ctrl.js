@@ -11,7 +11,7 @@
 			'GoogleUtils',
 			function($firebaseArray,$scope,GoogleUtils) {
 				$scope.getItemListNearMe = function() {
-					GoogleUtils.getItemListNearMe( 45.411 , -71.887 , 100);
+					GoogleUtils.getTypeList( -71.92280486082095 , 45.38583381084);
 				};
 				
 				$scope.isInPolygon = function() {
@@ -29,7 +29,7 @@
 				$scope.setupScope = function() {
 					$scope.label = "Group manager";
 				};
-
+				
 				$scope.setupScope();
 			}]);
 })(angular);

@@ -19,7 +19,8 @@
 					'menu.groupManager' : 'Manage groups',
 					save : 'Save',
 					title: 'Hello',
-					type: 'Type'
+					type: 'Type',
+					uploadImage: 'Upload an image'
 				});
 				$translateProvider.translations('fr', {
 					add : 'Ajouter',
@@ -34,7 +35,8 @@
 					'menu.groupManager' : 'Gérer les groupes',
 					save : 'Sauvegarder',
 					title: 'Allo',
-					type: 'Type'
+					type: 'Type',
+					uploadImage: 'Téléverser une image'
 				});
 
 				$translateProvider.preferredLanguage(locale);

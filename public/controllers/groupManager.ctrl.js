@@ -11,7 +11,7 @@
 			'GoogleUtils',
 			function($firebaseArray,$scope,GoogleUtils) {
 				$scope.getItemListNearMe = function() {
-					GoogleUtils.getTypeList( -71.92280486082095 , 45.38583381084);
+					GoogleUtils.getTypeList( -71.9114811862039 , 45.4147936304428);
 				};
 				
 				$scope.isInPolygon = function() {

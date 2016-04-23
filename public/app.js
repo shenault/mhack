@@ -1,7 +1,7 @@
 (function(angular) {
 	angular
 		.module('collaboratio.app', [
-			'ngMaterial'
+			'ngMaterial', 'pageslide-directive'
 		])
 
 		.config(function($mdIconProvider) {

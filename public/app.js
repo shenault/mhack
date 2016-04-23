@@ -108,7 +108,6 @@
 		.config(function($authProvider) {
 			$authProvider.google({
 				clientId: '626928516259-ucigbju2t1n5qj8sa6qf8vcsdo5bhpqg.apps.googleusercontent.com',
-				redirectUri: 'https://mhack-nmichaud.firebaseapp.com/eventReporter',
 				responseType: 'token'
 			});
 		});

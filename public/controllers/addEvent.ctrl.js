@@ -14,6 +14,10 @@
 					$mdSidenav('addEventSideNav').close();
 				};
 
+				$scope.save = function() {
+					$scope.close();
+				}
+
 				$scope.setupScope = function() {
 					var ref = new Firebase("https://mhack-gaubey.firebaseio.com/item");
 					$scope.images = $firebaseArray(ref);

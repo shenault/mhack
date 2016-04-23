@@ -21,12 +21,28 @@
 			</md-toolbar>
 
 			<pageslide ps-open="menuOpened" ps-side="left">
-				<div>
-					<p>MENU WOW</p>
+				<md-toolbar layout="row" class="md-hue-3">
+					<div class="md-toolbar-tools">
+						<span>Menu</span>
+					</div>
+				</md-toolbar>
+				<md-content>
+					<md-list flex>
+						<md-list-item class="md-3-line" ng-click="goToState('eventReporter')">
+							Rapporter un événement
+						</md-list-item>
+						<md-list-item class="md-3-line" ng-click="goToState('eventManager')">
+							Résoudre un événement
+						</md-list-item>
+						<md-list-item class="md-3-line" ng-click="goToState('groupManager')">
+							Gestion des groupes
+						</md-list-item>
+					</md-list>
+					<md-divider></md-divider>
 					<md-button ng-click="toggleMenu()">
-						CLOSE :(
+						Fermer
 					</md-button>
-				</div>
+				</md-content>
 			</pageslide>
 		</div>
 		<div ui-view></div>

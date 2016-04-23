@@ -23,24 +23,24 @@
 			<pageslide ps-open="menuOpened" ps-side="left">
 				<md-toolbar layout="row" class="md-hue-3">
 					<div class="md-toolbar-tools">
-						<span>Menu</span>
+						<span>{{'menu' | translate}}</span>
 					</div>
 				</md-toolbar>
 				<md-content>
 					<md-list flex>
-						<md-list-item class="md-3-line" ng-click="goToState('eventReporter')">
-							Rapporter un événement
+						<md-list-item class="md-3-line" ng-class="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="goToState('eventReporter')">
+							{{'menu.eventReporter' | translate}}
 						</md-list-item>
-						<md-list-item class="md-3-line" ng-click="goToState('eventManager')">
-							Résoudre un événement
+						<md-list-item class="md-3-line" ng-class="(state == 'eventManager' ? 'menu-selected' : '')" ng-click="goToState('eventManager')">
+							{{'menu.eventManager' | translate}}
 						</md-list-item>
-						<md-list-item class="md-3-line" ng-click="goToState('groupManager')">
-							Gestion des groupes
+						<md-list-item class="md-3-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
+							{{'menu.groupManager' | translate}}
 						</md-list-item>
 					</md-list>
 					<md-divider></md-divider>
 					<md-button ng-click="toggleMenu()">
-						Fermer
+						{{'close' | translate}}
 					</md-button>
 				</md-content>
 			</pageslide>

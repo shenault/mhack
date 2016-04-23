@@ -38,3 +38,18 @@ body, html {
     float: none;
     position: relative;
 }
+
+
+.collaboratio-logo {
+    width: auto;
+    height: 30px;
+}
+
+.collaboratio-signature {
+    width: auto;
+    height: 60px;
+}
+
+.collaboratio-signature:hover {
+    cursor:hand;
+}

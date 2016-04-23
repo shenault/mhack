@@ -28,20 +28,17 @@
 				</md-toolbar>
 				<md-content>
 					<md-list flex>
-						<md-list-item class="md-3-line" ng-click="null">
-							Rapporter
+						<md-list-item class="md-3-line" ng-click="goToState('eventReporter')">
+							Rapporter un événement
+						</md-list-item>
+						<md-list-item class="md-3-line" ng-click="goToState('eventManager')">
+							Résoudre un événement
+						</md-list-item>
+						<md-list-item class="md-3-line" ng-click="goToState('groupManager')">
+							Gestion des groupes
 						</md-list-item>
 					</md-list>
-					<md-list flex>
-						<md-list-item class="md-3-line" ng-click="null">
-							Item 2
-						</md-list-item>
-					</md-list>
-					<md-list flex>
-						<md-list-item class="md-3-line" ng-click="null">
-							Item 3
-						</md-list-item>
-					</md-list>
+					<md-divider></md-divider>
 					<md-button ng-click="toggleMenu()">
 						Fermer
 					</md-button>

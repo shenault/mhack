@@ -9,22 +9,32 @@
 				$translateProvider.translations('en', {
 					add : 'Ajouter',
 					addEvent : 'Report an event',
+					back : 'Back',
 					close : 'Close',
+					description : 'Description',
+					location : 'Location',
 					menu : 'Menu',
 					'menu.eventReporter' : 'Report an event',
 					'menu.eventManager' : 'Resolve an event',
 					'menu.groupManager' : 'Manage groups',
-					title: 'Hello'
+					save : 'Save',
+					title: 'Hello',
+					type: 'Type'
 				});
 				$translateProvider.translations('fr', {
 					add : 'Ajouter',
 					addEvent : 'Rapporter un événement',
+					back : 'Retour',
 					close : 'Fermer',
+					description : 'Description',
+					location : 'Localisation',
 					menu : 'Menu',
 					'menu.eventReporter' : 'Rapporter un événement',
 					'menu.eventManager' : 'Résoudre un événement',
 					'menu.groupManager' : 'Gérer les groupes',
-					title: 'Allo'
+					save : 'Sauvegarder',
+					title: 'Allo',
+					type: 'Type'
 				});
 
 				$translateProvider.preferredLanguage(locale);

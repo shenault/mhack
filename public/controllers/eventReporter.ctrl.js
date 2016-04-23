@@ -7,7 +7,12 @@
 
 		.controller('EventReporterController', [
 			'$scope',
-			function($scope) {
+			'$mdSidenav',
+			function($scope, $mdSidenav) {
+				$scope.addEvent = function() {
+					$mdSidenav('addEventSideNav').toggle();
+				}
+
 				$scope.setupScope = function() {
 					$scope.label = "Event reporter";
 				};

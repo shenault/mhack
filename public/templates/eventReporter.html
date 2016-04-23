@@ -1,4 +1,24 @@
 <div class="container">
 	<ng-map id="map" center="{{lat}}, {{lng}}"></ng-map>
 	<div>{{'title' | translate}} {{label}}</div>
+
+	<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="addEventSideNav">
+		<md-toolbar class="md-theme-light">
+			<h1 class="md-toolbar-tools">{{'addEvent' | translate}}</h1>
+		</md-toolbar>
+		<md-content ng-controller="AddEventController" layout-padding>
+			<form>
+				so much WOW
+			</form>
+			<md-button ng-click="close()" class="md-primary">
+				{{'close' | translate}}
+			</md-button>
+		</md-content>
+	</md-sidenav>
+
+	<div layout="row" layout-align="end end">
+		<md-button class="md-fab" aria-label="{{'add' | translate}}" ng-click="addEvent()">
+			<md-icon md-svg-icon="content:ic_create_24px"></md-icon>
+		</md-button>
+	</div>
 </div>

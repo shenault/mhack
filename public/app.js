@@ -1,6 +1,7 @@
 (function(angular) {
 	angular
 		.module('collaboratio.app', [
+			'firebase',
 			'ngMap',
 			'ngMaterial',
 			'pageslide-directive',

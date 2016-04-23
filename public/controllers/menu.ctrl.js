@@ -12,6 +12,10 @@
 					$scope.menuOpened = false;
 				};
 
+				$scope.toggleMenu = function() {
+					$scope.menuOpened = !$scope.menuOpened;
+				}
+
 				$scope.setupScope();
 			}]);
 })(angular);

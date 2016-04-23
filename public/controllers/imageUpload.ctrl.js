@@ -6,8 +6,8 @@
 		.module('collaboratio.app')
 
 		.controller('ImageUploadController', [
-			'$firebaseArray','$scope', '$timeout', 'Upload',
-			function($firebaseArray, $scope, $timeout, Upload) {
+			'$firebaseArray','$scope',
+			function($firebaseArray, $scope ) {
 
 				$scope.setupScope = function() {
 					var ref = new Firebase("https://mhack-gaubey.firebaseio.com/item");

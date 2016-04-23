@@ -1,7 +1,12 @@
 (function(angular) {
 	angular
 		.module('collaboratio.app', [
-			'firebase', 'ngFileUpload', 'ngMaterial', 'pageslide-directive'
+			'firebase',
+			'ngMap',
+			'ngMaterial',
+			'pageslide-directive',
+			'pascalprecht.translate',
+			'ui.router'
 		])
 
 		.config(function($mdIconProvider) {
@@ -22,7 +27,27 @@
 				.iconSet('places', 'assets/icons/svg-sprite-places.svg')
 				.iconSet('social', 'assets/icons/svg-sprite-social.svg')
 				.iconSet('toggle', 'assets/icons/svg-sprite-toggle.svg')
-		});
+		})
 
+		.config(function($stateProvider, $urlRouterProvider) {
+			$urlRouterProvider.otherwise('/eventReporter');
+
+			$stateProvider
+				.state('eventReporter', {
+					controller: "EventReporterController",
+					url: "/eventReporter",
+					templateUrl: "templates/eventReporter.html"
+				})
+				.state('eventManager', {
+					controller: "EventManagerController",
+					url: "/eventManager",
+					templateUrl: "templates/eventManager.html"
+				})
+				.state('groupManager', {
+					controller: "GroupManagerController",
+					url: "/groupManager",
+					templateUrl: "templates/groupManager.html"
+				})
+		});
 
 })(angular);

@@ -8,7 +8,8 @@
 			'pageslide-directive',
 			'pascalprecht.translate',
 			'satellizer',
-			'ui.router'
+			'ui.router',
+			'google.utils'
 		])
 
 		.config(function($mdIconProvider) {

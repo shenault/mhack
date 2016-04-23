@@ -9,7 +9,8 @@
 			'pascalprecht.translate',
 			'satellizer',
 			'ui.router',
-			'google.utils'
+			'google.utils',
+			'user.svc'
 		])
 
 		.config(function($mdIconProvider) {
@@ -32,33 +33,66 @@
 				.iconSet('toggle', 'assets/icons/svg-sprite-toggle.svg')
 		})
 
-		.config(function($stateProvider, $urlRouterProvider) {
+		.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
+			$locationProvider.html5Mode({
+				enabled: true,
+				requireBase: false
+			});
 			$urlRouterProvider.otherwise('/eventReporter');
 
 			$stateProvider
 				.state('login', {
 					controller: "LoginController",
 					url: "/login",
+					resolve: {
+						skipIfLoggedIn: skipIfLoggedIn
+					},
 					templateUrl: "templates/login.html"
 				})
 				.state('eventReporter', {
 					controller: "EventReporterController",
-					resolve: {
-						loginRequired: loginRequired
-					},
 					url: "/eventReporter",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
+					},
 					templateUrl: "templates/eventReporter.html"
 				})
 				.state('eventManager', {
 					controller: "EventManagerController",
 					url: "/eventManager",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
+					},
 					templateUrl: "templates/eventManager.html"
 				})
 				.state('groupManager', {
 					controller: "GroupManagerController",
 					url: "/groupManager",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
+					},
 					templateUrl: "templates/groupManager.html"
 				});
+
+			function skipIfLoggedIn($q, $auth) {
+				var deferred = $q.defer();
+				if ($auth.isAuthenticated()) {
+					deferred.reject();
+					$location.path('/eventReporter');
+				} else {
+					deferred.resolve();
+				}
+				return deferred.promise;
+			}
 
 			function loginRequired($q, $location, $auth) {
 				var deferred = $q.defer();
@@ -72,13 +106,9 @@
 		})
 
 		.config(function($authProvider) {
-			$authProvider.facebook({
-				clientId: '228043777561436',
-				responseType: 'token'
-			});
-
 			$authProvider.google({
 				clientId: '626928516259-ucigbju2t1n5qj8sa6qf8vcsdo5bhpqg.apps.googleusercontent.com',
+				redirectUri: 'https://mhack-nmichaud.firebaseapp.com/eventReporter',
 				responseType: 'token'
 			});
 		});

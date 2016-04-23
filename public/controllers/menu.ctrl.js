@@ -7,15 +7,12 @@
 
 		.controller('MenuController', [
 			'$auth',
+			'$firebaseArray',
+			'$http',
 			'$scope',
 			'$state',
-			function($auth, $scope, $state) {
-				$scope.authenticate = function(provider) {
-					$auth.authenticate(provider).then(function(boo) {
-						console.log(boo);
-					})
-				};
-
+			'$q',
+			function($auth, $firebaseArray, $http, $scope, $state, $q) {
 				$scope.goToState = function(state) {
 					$scope.state = state;
 					$state.go(state);

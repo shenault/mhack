@@ -14,7 +14,8 @@
 					'menu.eventReporter' : 'Report an event',
 					'menu.eventManager' : 'Resolve an event',
 					'menu.groupManager' : 'Manage groups',
-					title: 'Hello'
+					title: 'Hello',
+					uploadImage: 'Upload an image'
 				});
 				$translateProvider.translations('fr', {
 					add : 'Ajouter',
@@ -24,7 +25,8 @@
 					'menu.eventReporter' : 'Rapporter un événement',
 					'menu.eventManager' : 'Résoudre un événement',
 					'menu.groupManager' : 'Gérer les groupes',
-					title: 'Allo'
+					title: 'Allo',
+					uploadImage: 'Téléverser une image'
 				});
 
 				$translateProvider.preferredLanguage(locale);

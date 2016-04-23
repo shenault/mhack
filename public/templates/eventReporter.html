@@ -20,7 +20,7 @@
 		</div>
 	</md-toolbar>
 
-	<ng-map style="height:calc(100% - 64px);width:100%" id="map" center="{{lat}}, {{lng}}" styles="{{ styles }}"></ng-map>
+	<ng-include src="'templates/google-map.html'"></ng-include>
 
 	<div ng-controller="AddEventController">
 		<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="addEventSideNav">

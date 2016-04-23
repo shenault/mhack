@@ -1,6 +1,7 @@
 (function(angular) {
 	angular
 		.module('collaboratio.app', [
+			'ngMap',
 			'ngMaterial',
 			'pageslide-directive',
 			'pascalprecht.translate',

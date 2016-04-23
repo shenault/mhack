@@ -9,7 +9,8 @@
 			'pascalprecht.translate',
 			'satellizer',
 			'ui.router',
-			'google.utils'
+			'google.utils',
+			'user.svc'
 		])
 
 		.config(function($mdIconProvider) {
@@ -52,18 +53,33 @@
 					controller: "EventReporterController",
 					url: "/eventReporter",
 					resolve: {
-						loginRequired: loginRequired
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
 					},
 					templateUrl: "templates/eventReporter.html"
 				})
 				.state('eventManager', {
 					controller: "EventManagerController",
 					url: "/eventManager",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
+					},
 					templateUrl: "templates/eventManager.html"
 				})
 				.state('groupManager', {
 					controller: "GroupManagerController",
 					url: "/groupManager",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
+					},
 					templateUrl: "templates/groupManager.html"
 				});
 
@@ -90,11 +106,6 @@
 		})
 
 		.config(function($authProvider) {
-			$authProvider.facebook({
-				clientId: '228043777561436',
-				responseType: 'token'
-			});
-
 			$authProvider.google({
 				clientId: '626928516259-ucigbju2t1n5qj8sa6qf8vcsdo5bhpqg.apps.googleusercontent.com',
 				redirectUri: 'https://mhack-nmichaud.firebaseapp.com/eventReporter',

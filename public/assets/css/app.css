@@ -29,7 +29,11 @@ body, html {
 }
 
 .social-button {
-	margin-top: 15px;
+	margin-top: 16px;
+}
+
+.user-name {
+	margin-right: 16px;
 }
 
 .thumb {

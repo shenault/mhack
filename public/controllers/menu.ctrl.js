@@ -7,11 +7,12 @@
 
 		.controller('MenuController', [
 			'$auth',
+			'$firebaseArray',
+			'$http',
 			'$scope',
 			'$state',
-			function($auth, $scope, $state) {
-				$scope.name = "Hello world";
-
+			'$q',
+			function($auth, $firebaseArray, $http, $scope, $state, $q) {
 				$scope.goToState = function(state) {
 					$scope.state = state;
 					$state.go(state);
@@ -26,10 +27,6 @@
 				$scope.toggleMenu = function() {
 					$scope.menuOpened = !$scope.menuOpened;
 				};
-
-				$scope.$on('profile:refresh', function(event, profile) {
-					$scope.name = profile.name;
-				});
 
 				$scope.setupScope();
 			}]);

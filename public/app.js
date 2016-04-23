@@ -2,6 +2,7 @@
 	angular
 		.module('collaboratio.app', [
 			'firebase',
+			'ngFileUpload',
 			'ngMap',
 			'ngMaterial',
 			'pageslide-directive',

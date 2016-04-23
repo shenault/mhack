@@ -6,9 +6,11 @@
 		<md-toolbar class="md-theme-light">
 			<h1 class="md-toolbar-tools">{{'addEvent' | translate}}</h1>
 		</md-toolbar>
-		<md-content ng-controller="AddEventController" layout-padding>
+		<md-content ng-controller="AddEventController" layout-padding layout-column>
 			<form>
 				so much WOW
+				<button type="file" ngf-select="uploadFile($file, $invalidFiles)"
+						accept="image/*" ngf-max-size="10MB">Upload image</button>
 			</form>
 			<md-button ng-click="close()" class="md-primary">
 				{{'close' | translate}}

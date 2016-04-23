@@ -32,21 +32,28 @@
 				.iconSet('toggle', 'assets/icons/svg-sprite-toggle.svg')
 		})
 
-		.config(function($stateProvider, $urlRouterProvider) {
+		.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
+			$locationProvider.html5Mode({
+				enabled: true,
+				requireBase: false
+			});
 			$urlRouterProvider.otherwise('/eventReporter');
 
 			$stateProvider
 				.state('login', {
 					controller: "LoginController",
 					url: "/login",
+					resolve: {
+						skipIfLoggedIn: skipIfLoggedIn
+					},
 					templateUrl: "templates/login.html"
 				})
 				.state('eventReporter', {
 					controller: "EventReporterController",
+					url: "/eventReporter",
 					resolve: {
 						loginRequired: loginRequired
 					},
-					url: "/eventReporter",
 					templateUrl: "templates/eventReporter.html"
 				})
 				.state('eventManager', {
@@ -59,6 +66,17 @@
 					url: "/groupManager",
 					templateUrl: "templates/groupManager.html"
 				});
+
+			function skipIfLoggedIn($q, $auth) {
+				var deferred = $q.defer();
+				if ($auth.isAuthenticated()) {
+					deferred.reject();
+					$location.path('/eventReporter');
+				} else {
+					deferred.resolve();
+				}
+				return deferred.promise;
+			}
 
 			function loginRequired($q, $location, $auth) {
 				var deferred = $q.defer();
@@ -79,6 +97,7 @@
 
 			$authProvider.google({
 				clientId: '626928516259-ucigbju2t1n5qj8sa6qf8vcsdo5bhpqg.apps.googleusercontent.com',
+				redirectUri: 'https://mhack-nmichaud.firebaseapp.com/eventReporter',
 				responseType: 'token'
 			});
 		});

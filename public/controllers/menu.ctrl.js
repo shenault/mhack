@@ -10,11 +10,7 @@
 			'$scope',
 			'$state',
 			function($auth, $scope, $state) {
-				$scope.authenticate = function(provider) {
-					$auth.authenticate(provider).then(function(boo) {
-						console.log(boo);
-					})
-				};
+				$scope.name = "Hello world";
 
 				$scope.goToState = function(state) {
 					$scope.state = state;
@@ -30,6 +26,10 @@
 				$scope.toggleMenu = function() {
 					$scope.menuOpened = !$scope.menuOpened;
 				};
+
+				$scope.$on('profile:refresh', function(event, profile) {
+					$scope.name = profile.name;
+				});
 
 				$scope.setupScope();
 			}]);

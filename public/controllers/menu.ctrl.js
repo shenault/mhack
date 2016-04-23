@@ -6,9 +6,16 @@
 		.module('collaboratio.app')
 
 		.controller('MenuController', [
+			'$auth',
 			'$scope',
 			'$state',
-			function($scope, $state) {
+			function($auth, $scope, $state) {
+				$scope.authenticate = function(provider) {
+					$auth.authenticate(provider).then(function(boo) {
+						console.log(boo);
+					})
+				};
+
 				$scope.goToState = function(state) {
 					$scope.state = state;
 					$state.go(state);

@@ -45,3 +45,10 @@ body {
 .social-button {
 	margin-top: 15px;
 }
+
+.thumb {
+    width: 280px;
+    height: 280px;
+    float: none;
+    position: relative;
+}

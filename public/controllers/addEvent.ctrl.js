@@ -10,43 +10,72 @@
 			'$scope',
 			'$mdSidenav',
 			function($firebaseArray, $scope, $mdSidenav) {
-				$scope.close = function() {
+				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
+					if (!inSaving)
+						$scope.flushData();
 				};
 
 				$scope.save = function() {
-					$scope.close();
-				}
+					$scope.getLocation();
+					$scope.uploadFile($scope.saveCallback);
+					$scope.close(true);
+				};
+
+				$scope.saveCallback = function() {
+					if (!$scope.createdDate) $scope.createdDate = new Date();
+					if (!$scope.event.type) $scope.event.type = null;
+					if (!$scope.event.description) $scope.event.description = null;
+					$scope.items.$add({picture: $scope.picture,
+						lat: $scope.getLat(),
+						lng: $scope.getLng(),
+						createdDate: $scope.createdDate,
+						type: $scope.event.type,
+						desc: $scope.event.description
+					});
+					$scope.flushData();
+				};
 
 				$scope.setupScope = function() {
 					var ref = new Firebase("https://mhack-gaubey.firebaseio.com/item");
-					$scope.images = $firebaseArray(ref);
+					$scope.items = $firebaseArray(ref);
+					$scope.flushData();
+					$scope.getLocation();
 				};
 
-				$scope.uploadFile = function(file, errFile) {
-					$scope.file = file;
-					$scope.errFile = errFile;
+				$scope.flushData = function() {
+					$scope.createdDate = null;
+					$scope.event = null;
+					$scope.file = null;
+					$scope.picture = null;
+					$scope.latGpsRef = null;
+					$scope.latGps = null;
+					$scope.lngGpsRef = null;
+					$scope.lngGps = null;
+					$scope.lat = null;
+					$scope.lng = null;
+				};
 
-					if (file) {
+				$scope.uploadFile = function(callback) {
+					if ($scope.file) {
 						EXIF.getData($scope.file, function() {
-							$scope.getLocation();
+							$scope.picture = null;
 							$scope.latGpsRef = EXIF.getTag(this, "GPSLatitudeRef");
 							$scope.latGps = EXIF.getTag(this, "GPSLatitude");
 							$scope.lngGpsRef = EXIF.getTag(this, "GPSLongitudeRef");
 							$scope.lngGps = EXIF.getTag(this, "GPSLongitude");
-							var createdDate = EXIF.getTag(this, "DateTime");
-							if (!createdDate) createdDate = new Date();
+							$scope.createdDate = EXIF.getTag(this, "DateTime");
 
 							var reader = new FileReader();
 							reader.onload = function(theFile) {
-								$scope.images.$add({picture: theFile.target.result,
-									lat: $scope.getLat(),
-									lng: $scope.getLng(),
-									createdDate: createdDate});
+								$scope.picture = theFile.target.result;
+								callback();
 							};
 
-							reader.readAsDataURL(file);
+							reader.readAsDataURL($scope.file);
 						});
+					} else {
+						callback();
 					}
 				};
 

@@ -17,23 +17,24 @@
 				</md-button>
 			</div>
 		</md-toolbar>
-		<md-content ng-controller="AddEventController" layout-padding layout-column>
-			<form>
-				<md-input-container>
-					<label>{{'type' | translate}}</label>
-					<md-select ng-model="event.type">
-						<md-option ng-repeat="type in ctrl.typeList" value="{{type.uuid}}" ng-disabled="$index === 1">
-							{{language == 'fr'  ? type.descriptionFr : type.descriptionEn }}
-						</md-option>
-					</md-select>
-				</md-input-container>
-				<button type="file" ngf-select="uploadFile($file, $invalidFiles)"
-						accept="image/*" ngf-max-size="10MB">{{'uploadImage' | translate}}</button>
-				<md-input-container class="md-block">
-					<label>{{'description' | translate}}</label>
-					<textarea ng-model="event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
-				</md-input-container>
-			</form>
+		<md-content layout-padding layout="column">
+			<md-input-container>
+				<label>{{'type' | translate}}</label>
+				<md-select ng-model="event.type">
+					<md-option ng-repeat="type in ctrl.typeList" value="{{type.uuid}}" ng-disabled="$index === 1">
+						{{language == 'fr'  ? type.descriptionFr : type.descriptionEn }}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<img ng-show="file" ngf-thumbnail="file" class="thumb" />
+			<button ng-click="close()" ng-show="file">Remove</button>
+			<button type="file" ngf-select ng-model="file"
+					accept="image/*" ngf-max-size="10MB"
+					ng-show="!file">{{'uploadImage' | translate}}</button>
+			<md-input-container class="md-block">
+				<label>{{'description' | translate}}</label>
+				<textarea ng-model="event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+			</md-input-container>
 			<div>
 				<span>{{'location' | translate}} : TODO</span>
 			</div>

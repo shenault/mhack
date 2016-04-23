@@ -7,6 +7,8 @@
 				var locale = navigator.languages ? navigator.languages[0] : navigator.language;
 
 				$translateProvider.translations('en', {
+					add : 'Ajouter',
+					addEvent : 'Report an event',
 					close : 'Close',
 					menu : 'Menu',
 					'menu.eventReporter' : 'Report an event',
@@ -15,6 +17,8 @@
 					title: 'Hello'
 				});
 				$translateProvider.translations('fr', {
+					add : 'Ajouter',
+					addEvent : 'Rapporter un événement',
 					close : 'Fermer',
 					menu : 'Menu',
 					'menu.eventReporter' : 'Rapporter un événement',

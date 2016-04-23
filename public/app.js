@@ -7,6 +7,7 @@
 			'ngMaterial',
 			'pageslide-directive',
 			'pascalprecht.translate',
+			'satellizer',
 			'ui.router'
 		])
 
@@ -34,8 +35,16 @@
 			$urlRouterProvider.otherwise('/eventReporter');
 
 			$stateProvider
+				.state('login', {
+					controller: "LoginController",
+					url: "/login",
+					templateUrl: "templates/login.html"
+				})
 				.state('eventReporter', {
 					controller: "EventReporterController",
+					resolve: {
+						loginRequired: loginRequired
+					},
 					url: "/eventReporter",
 					templateUrl: "templates/eventReporter.html"
 				})
@@ -48,7 +57,29 @@
 					controller: "GroupManagerController",
 					url: "/groupManager",
 					templateUrl: "templates/groupManager.html"
-				})
+				});
+
+			function loginRequired($q, $location, $auth) {
+				var deferred = $q.defer();
+				if ($auth.isAuthenticated()) {
+					deferred.resolve();
+				} else {
+					$location.path('/login');
+				}
+				return deferred.promise;
+			}
+		})
+
+		.config(function($authProvider) {
+			$authProvider.facebook({
+				clientId: '228043777561436',
+				responseType: 'token'
+			});
+
+			$authProvider.google({
+				clientId: '626928516259-ucigbju2t1n5qj8sa6qf8vcsdo5bhpqg.apps.googleusercontent.com',
+				responseType: 'token'
+			});
 		});
 
 })(angular);

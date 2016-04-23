@@ -18,6 +18,12 @@ body {
     height: 100%
 }
 
+.bottom-right {
+    position: fixed;
+    right: 2%;
+    bottom: 24px;
+}
+
 .centered-404 {
     position: fixed;
     top: 50%;
@@ -26,6 +32,16 @@ body {
     background-image: url(../img/404.png);
 }
 
+.login-section {
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+}
+
 .menu-selected {
     background-color: rgba(158,158,158,0.2);
+}
+
+.social-button {
+	margin-top: 15px;
 }

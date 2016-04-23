@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="collaboratio.app">
 	<head>
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.7/angular-material.min.css">
 		<link rel="stylesheet" type="text/css" href="https://rawgit.com/alexk111/ngImgCrop/master/compile/unminified/ng-img-crop.css">
@@ -9,8 +9,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Collaboratio</title>
 	</head>
-	<body ng-app="collaboratio.app">
-		<div ng-controller="MenuController">
+	<body layout="row" ng-controller="MenuController">
+		<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
 			<md-toolbar class="md-hue-2">
 				<div class="md-toolbar-tools">
 					<md-button class="md-icon-button" ng-click="toggleMenu()">
@@ -21,33 +21,25 @@
 					</h2>
 				</div>
 			</md-toolbar>
-
-			<pageslide ps-open="menuOpened" ps-side="left">
-				<md-toolbar layout="row" class="md-hue-3">
-					<div class="md-toolbar-tools">
-						<span>{{'menu' | translate}}</span>
-					</div>
-				</md-toolbar>
-				<md-content>
-					<md-list flex>
-						<md-list-item class="md-3-line" ng-class="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="goToState('eventReporter')">
-							{{'menu.eventReporter' | translate}}
-						</md-list-item>
-						<md-list-item class="md-3-line" ng-class="(state == 'eventManager' ? 'menu-selected' : '')" ng-click="goToState('eventManager')">
-							{{'menu.eventManager' | translate}}
-						</md-list-item>
-						<md-list-item class="md-3-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
-							{{'menu.groupManager' | translate}}
-						</md-list-item>
-					</md-list>
-					<md-divider></md-divider>
-					<md-button class="md-primary" ng-click="toggleMenu()">
-						{{'close' | translate}}
-					</md-button>
-				</md-content>
-			</pageslide>
-		</div>
-		<div class="container" ui-view></div>
+			<md-content>
+				<md-list flex>
+					<md-list-item class="md-3-line" ng-class="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="goToState('eventReporter')">
+						{{'menu.eventReporter' | translate}}
+					</md-list-item>
+					<md-list-item class="md-3-line" ng-class="(state == 'eventManager' ? 'menu-selected' : '')" ng-click="goToState('eventManager')">
+						{{'menu.eventManager' | translate}}
+					</md-list-item>
+					<md-list-item class="md-3-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
+						{{'menu.groupManager' | translate}}
+					</md-list-item>
+				</md-list>
+				<md-divider></md-divider>
+				<md-button class="md-primary" ng-click="toggleMenu()">
+					{{'close' | translate}}
+				</md-button>
+			</md-content>
+		</md-sidenav>
+		<div layout="column" class="relative" layout-fill role="main" ui-view></div>
 	</body>
 
 	<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyASCztQawEwdQUQqi3oEjbqxRKRK6c0XJc"></script>
@@ -82,4 +74,6 @@
 	<script type="text/javascript" src="controllers/groupManager.ctrl.js"></script>
 	<script type="text/javascript" src="controllers/login.ctrl.js"></script>
 	<script type="text/javascript" src="controllers/menu.ctrl.js"></script>
+
+	<script type="text/javascript" src="utils/google.utils.js"></script>
 </html>

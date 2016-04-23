@@ -32,8 +32,7 @@
 					},
 
 					isInPolygon: function(lat, lng, p) {
-
-						return returnValue;
+						return google.maps.geometry.poly.containsLocation(new google.maps.LatLng({lat: lat, lng: lng}), p);
 					},
 
 					isInPolygons: function(lat, lng, pl) {

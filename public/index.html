@@ -8,6 +8,11 @@
 		<title>Collaboratio</title>
 	</head>
 	<body ng-app="collaboratio.app">
+		<div ng-controller="ImageUploadController">
+			<button type="file" ngf-select="uploadFile($file, $invalidFiles)"
+					accept="image/*" ngf-max-size="5MB">Upload image</button>
+		</div>
+
 		<div ng-controller="MenuController">
 			<md-toolbar class="md-hue-2">
 				<div class="md-toolbar-tools">
@@ -41,12 +46,13 @@
 	<script src="https://angular-file-upload.appspot.com/js/ng-file-upload.js"></script>
 	<script src="https://angular-file-upload.appspot.com/js/ng-file-upload-shim.js"></script>
 	<script src="https://rawgit.com/alexk111/ngImgCrop/master/compile/unminified/ng-img-crop.js"></script>
-	<script src="https://raw.githubusercontent.com/exif-js/exif-js/master/exif.js"></script>
 
+	<script src="assets/extern/exif.js"></script>
 	<script src="assets/extern/angular-pageslide-directive.min.js"></script>
 
 	<script src="app.js"></script>
 
 	<!-- Controllers -->
 	<script type="text/javascript" src="controllers/menu.ctrl.js"></script>
+	<script type="text/javascript" src="controllers/imageUpload.ctrl.js"></script>
 </html>

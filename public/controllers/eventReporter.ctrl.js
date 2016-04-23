@@ -11,6 +11,10 @@
 			function($scope, $mdSidenav) {
 
 
+				$scope.toggleSidenav = function(menuId) {
+					$mdSidenav(menuId).toggle();
+				};
+
 				/**
 				 * https://snazzymaps.com/style/1/pale-dawn
 				 * */

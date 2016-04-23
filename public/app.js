@@ -3,6 +3,7 @@
 		.module('collaboratio.app', [
 			'ngMaterial',
 			'pageslide-directive',
+			'pascalprecht.translate',
 			'ui.router'
 		])
 
@@ -46,6 +47,5 @@
 					templateUrl: "templates/groupManager.html"
 				})
 		});
-
 
 })(angular);

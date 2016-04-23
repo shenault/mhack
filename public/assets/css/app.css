@@ -18,6 +18,12 @@ body {
     height: 100%
 }
 
+.bottom-right {
+    position: fixed;
+    right: 2%;
+    bottom: 24px;
+}
+
 .centered-404 {
     position: fixed;
     top: 50%;

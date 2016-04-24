@@ -12,7 +12,8 @@
 			'$window',
 			'GoogleUtils',
 			'ZapUtils',
-			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils) {
+			'NgMap',
+			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils,NgMap) {
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();

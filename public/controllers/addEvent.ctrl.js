@@ -208,6 +208,7 @@
 				});
 
                 $scope.$on('addEvent', function (event, arg) {
+					$scope.flushData();
 					$scope.event = {type: $scope.typeList[0]};
 					$scope.initGpsLocation();
 					$scope.initImageLocation();

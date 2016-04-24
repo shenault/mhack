@@ -57,7 +57,7 @@
 						ng-show="!file">{{'uploadImage' | translate}}</button>
 				<md-input-container class="md-block">
 					<label>{{'description' | translate}}</label>
-					<textarea ng-model="event.description" ng-disabled="editMode" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+					<textarea ng-model="event.desc" ng-disabled="editMode" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 				</md-input-container>
 				<md-button ng-click="save()" ng-hide="editMode" class="md-primary">
 					{{'save' | translate}}

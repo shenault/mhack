@@ -34,7 +34,7 @@
 		})
 
 		.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
-			$urlRouterProvider.otherwise('/');
+			$urlRouterProvider.otherwise('/login');
 			$stateProvider
 				.state('login', {
 					controller: "LoginController",
@@ -43,6 +43,11 @@
 				})
 				.state('eventReporter', {
 					controller: "EventReporterController",
+					resolve: {
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser();
+						}]
+					},
 					url: "/",
 					templateUrl: "templates/eventReporter.html"
 				})

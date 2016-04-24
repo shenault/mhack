@@ -10,11 +10,19 @@
 			'$rootScope',
 			'$scope',
 			'$state',
-			function($auth, $rootScope, $scope, $state) {
+			'$firebaseAuth',
+			'ENV',
+			function($auth, $rootScope, $scope, $state, $firebaseAuth, ENV) {
 				$scope.authenticate = function(provider) {
-					$auth.authenticate(provider).then(function(accessToken) {
+					console.log(ENV.dbHost);
+					var ref = new Firebase("https://mhack-nmichaud.firebaseio.com");
+					var auth = $firebaseAuth(ref);
+					auth.$authWithOAuthPopup("google", {
+						remember: "sessionOnly",
+						scope: "email"
+					}).then(function(){
 						$state.go('eventReporter');
-					})
+					});
 				};
 			}]);
 })(angular);

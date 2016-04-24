@@ -9,27 +9,16 @@
 			'$q',
 			'$rootScope',
 			'$firebaseArray',
+			'$firebaseAuth',
 			'ENV',
-			function($auth, $http, $q, $rootScope, $firebaseArray, ENV) {
+			function($auth, $http, $q, $rootScope, $firebaseArray, $firebaseAuth, ENV) {
 				var currentUser = null;
+				var ref = new Firebase("https://mhack-nmichaud.firebaseio.com");
+				var auth = $firebaseAuth(ref);
 
 				return {
 					getCurrentUser : function() {
 						return user;
-					},
-
-					getUserProfileByAccessToken : function(accessToken) {
-						var deferred = $q.defer();
-
-						$http({
-							method: 'GET',
-							url: 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + accessToken
-						}).then(function successCallback(response) {
-							deferred.resolve(response.data);
-						}, function errorCallback(response) {
-						});
-
-						return deferred.promise;
 					},
 
 					getUserByEmail : function(email) {
@@ -51,23 +40,23 @@
 
 					resolveUser : function() {
 						var deferred = $q.defer();
+						var googleAuth = null;
 						var ref = new Firebase(ENV.dbHost + "/user");
 						var self = this;
 
 						if (!currentUser) {
-							self.getUserProfileByAccessToken($auth.getToken()).then(function (userProfile) {
-								self.getUserByEmail(userProfile.email).then(function (user) {
-									currentUser = {
-										email: userProfile.email,
-										picture: userProfile.picture,
-										userName: userProfile.name
-									};
-									if (!user) {
-										$firebaseArray(ref).$add(currentUser);
-									}
+							googleAuth = auth.$getAuth().google;
+							self.getUserByEmail(googleAuth.email).then(function (user) {
+								currentUser = {
+									email: googleAuth.email,
+									picture:googleAuth.profileImageURL,
+									userName: googleAuth.displayName
+								};
+								if (!user) {
+									$firebaseArray(ref).$add(currentUser);
+								}
 
-									deferred.resolve(currentUser);
-								});
+								deferred.resolve(currentUser);
 							});
 						} else {
 							deferred.resolve(currentUser);

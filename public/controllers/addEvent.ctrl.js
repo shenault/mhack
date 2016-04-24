@@ -17,6 +17,12 @@
 					if (!inSaving)
 						$scope.flushData();
 				};
+				
+				$scope.confirm = function() {
+				};
+				
+				$scope.resolve = function() {
+				};
 
 				$scope.save = function() {
 					$scope.getLocation();

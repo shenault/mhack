@@ -34,9 +34,11 @@
 						<md-icon md-svg-icon="content:ic_save_24px"></md-icon>
 					</md-button>
 					
-					<md-button class="md-icon-button" aria-label="{{'confirm' | translate}}" show="editMode" ng-click="confirm()">
+					<md-button class="md-icon-button" aria-label="{{'confirm' | translate}}" ng-show="editMode" ng-click="confirm()">
 						<md-icon md-svg-icon="action:ic_thumb_up_24px"></md-icon>
 					</md-button>
+					
+					<span ng-show="editMode">({{ event.reportCount }})</span>
 				</div>
 			</md-toolbar>
 			<md-content layout-padding layout="column">

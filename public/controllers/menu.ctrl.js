@@ -8,11 +8,12 @@
 		.controller('MenuController', [
 			'$auth',
 			'$scope',
+			'$rootScope',
 			'$state',
 			'$q',
 			'$window',
 			'$mdSidenav',
-			function($auth, $scope, $state, $q, $window, $mdSidenav) {
+			function($auth, $scope,$rootScope, $state, $q, $window, $mdSidenav) {
 				$scope.goToState = function(state) {
 					$scope.state = state;
 					$state.go(state);
@@ -39,6 +40,11 @@
 						$scope.$digest();
 					},100)
 				});
+
+				$scope.reportEvent = function(){
+					$rootScope.$broadcast('addEvent', {});
+					$mdSidenav('addEventSideNav').toggle();
+				};
 
 
 				$scope.setupScope();

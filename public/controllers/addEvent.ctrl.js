@@ -193,7 +193,7 @@
 				});
 
                 $scope.$on('addEvent', function (event, arg) {
-					$scope.event.type = $scope.typeList[0];
+					$scope.event = {type: $scope.typeList[0]};
                 });
 
 				$scope.$on('reverseGeocode', function (event, data) {

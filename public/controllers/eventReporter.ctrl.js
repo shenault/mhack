@@ -113,6 +113,7 @@
 				}, {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#dadada"}, {"lightness": 17}]}];
 
 				$scope.addEvent = function() {
+					$rootScope.$broadcast('addEvent', null);
 					$mdSidenav('addEventSideNav').toggle();
 				};
 

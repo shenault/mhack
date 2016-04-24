@@ -11,7 +11,8 @@
 			'$rootScope',
 			'$mdSidenav',
 			'ENV',
-			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV) {
+            'GoogleUtils',
+			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV, GoogleUtils) {
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
 					if (!inSaving)
@@ -158,6 +159,52 @@
 					$scope.lat = arg.lat;
 					$scope.lng = arg.lng;
 					$scope.lat = arg.lat;
+
+					$scope.typeList = [ {
+							"descEn" :"Entrave à la circulation",
+							"descFr" : "Entrave à la circulation",
+							"uuid": "UUID1"
+						},
+						{
+							"descEn" : "Débris/Bris/Casse",
+							"descFr" : "Débris/Bris/Casse",
+							"uuid": "UUID2"
+						},
+						{
+							"descEn" : "Graffiti",
+							"descFr" : "Graffiti",
+							"uuid": "UUID3"
+						},{
+							"descEn" : "Event",
+							"descFr" : "Evenement",
+							"uuid": "UUID4"
+						}];
 				});
+
+                $scope.$on('addEvent', function (event, arg) {
+                    $scope.typeList = [ {
+							"descEn" :"Entrave à la circulation",
+							"descFr" : "Entrave à la circulation",
+							"uuid": "UUID1"
+						},
+						{
+							"descEn" : "Débris/Bris/Casse",
+							"descFr" : "Débris/Bris/Casse",
+								"descEn" :"Entrave à la circulation",
+						"descFr" : "Entrave à la circulation",
+						"uuid": "UUID2"
+						},
+						 {
+							"descEn" : "Graffiti",
+							"descFr" : "Graffiti",
+							"uuid": "UUID3"
+						},{
+							"descEn" : "Event",
+							"descFr" : "Evenement",
+							"uuid": "UUID4"
+						}];
+					//$scope.getLocation();
+                    //$scope.typeList = GoogleUtils.getTypeList($scope.lat, $scope.lng);
+                });
 			}]);
 })(angular);

@@ -14,8 +14,7 @@
 			'ENV',
 			function($auth, $rootScope, $scope, $state, $firebaseAuth, ENV) {
 				$scope.authenticate = function(provider) {
-					console.log(ENV.dbHost);
-					var ref = new Firebase("https://mhack-nmichaud.firebaseio.com");
+					var ref = new Firebase(ENV.dbHost);
 					var auth = $firebaseAuth(ref);
 					auth.$authWithOAuthPopup("google", {
 						remember: "sessionOnly",

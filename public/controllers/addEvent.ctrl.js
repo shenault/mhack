@@ -40,6 +40,7 @@
 
 				$scope.setupScope = function() {
 					var ref = new Firebase(ENV.dbHost + "/item");
+					$scope.editMode = false;
 					$scope.items = $firebaseArray(ref);
 					$scope.flushData();
 					$scope.getLocation();
@@ -149,8 +150,14 @@
 				 * SUBSCRIBERS
 				 */
 				$scope.$on('edit', function (event, arg) {
-					console.log("RECEIVED event type : " + arg.type);
 					$scope.event = arg;
+
+					$scope.editMode = true;
+
+					$scope.file = arg.picture;
+					$scope.lat = arg.lat;
+					$scope.lng = arg.lng;
+					$scope.lat = arg.lat;
 				});
 			}]);
 })(angular);

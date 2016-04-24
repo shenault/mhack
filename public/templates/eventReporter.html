@@ -30,8 +30,12 @@
 						<span>{{'addEvent' | translate}}</span>
 					</h2>
 					<span flex></span>
-					<md-button class="md-icon-button" aria-label="{{'save' | translate}}" ng-click="save()">
+					<md-button class="md-icon-button" aria-label="{{'save' | translate}}" ng-hide="editMode" ng-click="save()">
 						<md-icon md-svg-icon="content:ic_save_24px"></md-icon>
+					</md-button>
+					
+					<md-button class="md-icon-button" aria-label="{{'confirm' | translate}}" show="editMode" ng-click="confirm()">
+						<md-icon md-svg-icon="action:ic_thumb_up_24px"></md-icon>
 					</md-button>
 				</div>
 			</md-toolbar>
@@ -45,19 +49,25 @@
 					</md-select>
 				</md-input-container>
 				<img ng-show="file" ngf-thumbnail="file" class="thumb" />
-				<button ng-click="close()" ng-show="file">Remove</button>
+				<button ng-click="close()" ng-show="file && !editMode">Remove</button>
 				<button type="file" ngf-select ng-model="file"
-						accept="image/*" ngf-max-size="10MB"
+						accept="image/*" ngf-max-size="10MB" ng-disabled="editMode"
 						ng-show="!file">{{'uploadImage' | translate}}</button>
 				<md-input-container class="md-block">
 					<label>{{'description' | translate}}</label>
-					<textarea ng-model="event.description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+					<textarea ng-model="event.description" ng-disabled="editMode" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 				</md-input-container>
 				<div>
 					<span>{{'location' | translate}} : TODO</span>
 				</div>
-				<md-button ng-click="save()" class="md-primary">
+				<md-button ng-click="save()" ng-hide="editMode" class="md-primary">
 					{{'save' | translate}}
+				</md-button>
+				<md-button ng-click="confirm()" ng-show="editMode" class="md-primary">
+					{{'confirm' | translate}}
+				</md-button>
+				<md-button ng-click="resolve()" ng-show="editMode" class="md-primary">
+					{{'resolve' | translate}}
 				</md-button>
 			</md-content>
 		</md-sidenav>

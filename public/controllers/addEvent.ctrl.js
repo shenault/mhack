@@ -9,7 +9,7 @@
 			'$firebaseArray',
 			'$scope',
 			'$mdSidenav',
-			'ENV'
+			'ENV',
 			function($firebaseArray, $scope, $mdSidenav,ENV) {
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();

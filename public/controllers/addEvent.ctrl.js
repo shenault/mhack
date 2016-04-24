@@ -41,7 +41,8 @@
 					if (!$scope.createdDate) $scope.createdDate = new Date();
 					if (!$scope.event.type) $scope.event.type = null;
 					if (!$scope.event.description) $scope.event.description = null;
-					$scope.events.$add({picture: $scope.picture,
+					var picture = $scope.refPicture.push($scope.picture);
+					$scope.events.$add({picture: picture.key(),
 						lat: $scope.getLat(),
 						lng: $scope.getLng(),
 						createdDate: $scope.createdDate,
@@ -169,7 +170,9 @@
 				$scope.$on('edit', function (event, arg) {
 					$scope.event = arg;
 
-					$scope.file = arg.picture;
+					$scope.refPicture.child(arg.picture).on("value", function (snapshot) {
+						$scope.file = snapshot.val();
+					});
 
 					$scope.editMode = true;
 

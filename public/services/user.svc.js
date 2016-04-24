@@ -54,6 +54,8 @@
 								};
 								if (!user) {
 									$firebaseArray(ref).$add(currentUser);
+								} else {
+									currentUser = user;
 								}
 
 								deferred.resolve(currentUser);

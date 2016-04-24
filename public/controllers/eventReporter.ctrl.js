@@ -220,7 +220,7 @@
 					for (var k in map.customMarkers) {
 						var cm = map.customMarkers[k];
 
-						if (cm.class == "marker-event" && typeof cm.position != String){
+						if ((cm.class == "marker-event" || cm.class == "marker-zap") && typeof cm.position != String){
 							$scope.dynMarkers.push(cm);
 							bounds.extend(cm.getPosition());
 						}

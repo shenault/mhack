@@ -8,9 +8,10 @@
 		.controller('EventReporterController', [
 			'$scope',
 			'$mdSidenav',
+			'$window',
 			'GoogleUtils',
 			'ZapUtils',
-			function($scope, $mdSidenav, GoogleUtils, ZapUtils) {
+			function($scope, $mdSidenav, $window, GoogleUtils, ZapUtils) {
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();
@@ -171,6 +172,17 @@
 						$scope.error = "Geolocation is not supported by this browser.";
 					}
 				};
+
+				angular.element($window).bind('resize', function() {
+					setTimeout(function(){
+						if((window.innerHeight <= 700)  && ($window.innerWidth / $window.innerHeight) > 1) {
+							$scope.direction ="right";
+						} else {
+							$scope.direction = "up";
+						}
+						$scope.$digest();
+					},100)
+				});
 
 				$scope.getLocation();
 			}]);

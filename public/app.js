@@ -46,7 +46,7 @@
 					controller: "EventReporterController",
 					resolve: {
 						loginRequired: loginRequired,
-						user: ['UserService', function(UserService) {
+						user: ['loginRequired', 'UserService', function(loginRequired, UserService) {
 							return UserService.resolveUser() ;
 						}]
 					},

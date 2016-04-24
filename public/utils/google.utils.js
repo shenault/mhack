@@ -15,19 +15,19 @@
 			'$translate',
 			'$window',
 			'$firebaseArray',
-			function( $filter, $rootScope, $translate, $window,$firebaseArray) {
+			'ENV',
+			function( $filter, $rootScope, $translate, $window,$firebaseArray, ENV) {
 				return {
 
 					getTypeList: function(lat, lng) {
-						var refGroup = new Firebase("https://mhack-ghislain.firebaseio.com/group");
+						var refGroup = new Firebase(ENV.dbHost + "/group");
 						var self = this;
 						var returnValue = [];
 						var returnValueKey = [];
-
 						refGroup.orderByKey().on("value", function(snapshot) {
 							snapshot.forEach(function(data) {
 								angular.forEach(data.val().zone,function(zone, key){
-									var refZone = new Firebase("https://mhack-ghislain.firebaseio.com/zone");
+									var refZone = new Firebase(ENV.dbHost + "/zone");
 									refZone.orderByKey().equalTo(zone).on("value", function(snapshot){
 										snapshot.forEach(function(zone) {
 											var amIinZone = false;
@@ -35,8 +35,8 @@
 												var pathsForGeometry = [];
 
 												for (var j=0; j < zone.val().path[i].coordinates.length;j++) {
-													var coorlat = zone.val().path[i].coordinates[j][0];
-													var coorlng = zone.val().path[i].coordinates[j][1];
+													var coorlng = zone.val().path[i].coordinates[j][0];
+													var coorlat = zone.val().path[i].coordinates[j][1];
 
 													pathsForGeometry.push(new google.maps.LatLng(coorlat, coorlng));
 
@@ -74,7 +74,7 @@
 						returnValueKey =  returnValueKey.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 
 						//get type
-						var refType = new Firebase("https://mhack-ghislain.firebaseio.com/type");
+						var refType = new Firebase(ENV.dbHost + "/type");
 
 						for (var i = 0; i < returnValueKey.length;i++) {
 							refType.orderByKey().equalTo(returnValueKey[i]).on("value", function (snapshot) {
@@ -94,7 +94,7 @@
 					},
 
 					getItemListNearMe: function(lat, lng, meters) {
-						var ref = new Firebase("https://mhack-ghislain.firebaseio.com/item");
+						var ref = new Firebase(ENV.dbHost + "/item");
 						var self = this;
 						var returnValue = [];
 

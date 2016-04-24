@@ -13,9 +13,9 @@
 		<link rel="shortcut icon" sizes="196x196" href="assets/img/collaboratio-192x192.png">
 		<title>Collaboratio</title>
 	</head>
-	<body layout="row">
-		<div ng-controller="MenuController" ng-include="'templates/menu.html'"></div>
-		<div layout="column" class="relative" layout-fill role="main" ui-view></div>
+	<body layout="row" ng-controller="MenuController" >
+		<ng-include src="'templates/menu.html'" layout="column"></ng-include>
+		<div layout-fill layout="column" class="relative" role="main" ui-view></div>
 	</body>
 
 	<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyASCztQawEwdQUQqi3oEjbqxRKRK6c0XJc"></script>

@@ -190,48 +190,10 @@
 					});
 
 					$scope.editMode = true;
-
-					$scope.typeList = [ {
-							"descEn" :"Entrave à la circulation",
-							"descFr" : "Entrave à la circulation",
-							"uuid": "UUID1"
-						},
-						{
-							"descEn" : "Débris/Bris/Casse",
-							"descFr" : "Débris/Bris/Casse",
-							"uuid": "UUID2"
-						},
-						{
-							"descEn" : "Graffiti",
-							"descFr" : "Graffiti",
-							"uuid": "UUID3"
-						},{
-							"descEn" : "Event",
-							"descFr" : "Evenement",
-							"uuid": "UUID4"
-						}];
 				});
 
                 $scope.$on('addEvent', function (event, arg) {
-                    $scope.typeList = [ {
-							"descEn" :"Entrave à la circulation",
-							"descFr" : "Entrave à la circulation",
-							"uuid": "UUID1"
-						},
-						{
-							"descEn" : "Débris/Bris/Casse",
-							"descFr" : "Débris/Bris/Casse",
-						"uuid": "UUID2"
-						},
-						 {
-							"descEn" : "Graffiti",
-							"descFr" : "Graffiti",
-							"uuid": "UUID3"
-						},{
-							"descEn" : "Event",
-							"descFr" : "Evenement",
-							"uuid": "UUID4"
-						}];
+					$scope.event.type = $scope.typeList[0];
                 });
 
 				$scope.$on('reverseGeocode', function (event, data) {

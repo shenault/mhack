@@ -19,6 +19,7 @@
 
 				var ref = new Firebase(ENV.dbHost + "/item");
 				$scope.refPicture = new Firebase(ENV.dbHost + "/picture");
+				$scope.typeList = $firebaseArray(new Firebase(ENV.dbHost + "/type"));
 				$scope.events = $firebaseArray(ref);
 
 				$scope.toggleSidenav = function(menuId) {

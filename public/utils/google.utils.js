@@ -146,7 +146,7 @@
                                     locationName = "" ;
                                 }
 
-								$scope.$broadcast('reverseGeocode', {locationName: locationName});
+								$rootScope.$broadcast('reverseGeocode', {locationName: locationName});
                             }
                         });
                     }

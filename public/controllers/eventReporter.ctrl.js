@@ -18,6 +18,7 @@
 			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils,NgMap, ENV, $firebaseArray) {
 
 				var ref = new Firebase(ENV.dbHost + "/item");
+				$scope.refPicture = new Firebase(ENV.dbHost + "/picture");
 				$scope.events = $firebaseArray(ref);
 
 				$scope.toggleSidenav = function(menuId) {

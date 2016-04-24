@@ -1,13 +1,19 @@
 <ng-map style="height:calc(100% - 64px);width:100%" id="map" center="{{lat}}, {{lng}}" styles="{{ styles }}">
 
-	<custom-marker ng-repeat="p in events track by $index"
+	<custom-marker ng-repeat="event in events track by $index"
 			id="custom-marker-{{$index}}"
-			on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)"
-			position="{{p.pos}}">
+			on-click=""
+			position="{{event.lat}}, {{event.lng}}">
 		<div>
 			<img src="assets/img/pin_event.png">
 		</div>
 	</custom-marker>
+
+	<custom-marker 	ng-repeat="zap in zaps"	position="{{zap.pos}}">
+		<div>
+			<img src="assets/img/pin_zap.png">
+		</div>
+	</custom-marker >
 
 	<info-window id="foo" on-mouseover="vm.mouseover()">
 		<div ng-non-bindable="">
@@ -16,12 +22,8 @@
 		</div>
 	</info-window>
 	<kml-layer ng-if="showAireAmenagee" url="https://mhack-gaubey.firebaseapp.com/assets/kml/aireamenagee.kml" ></kml-layer>
-	<!--<kml-layer ng-if="showArrondissement" url="https://mhack-gaubey.firebaseapp.com/assets/kml/arrondissement.kml" ></kml-layer>-->
-	<!--<kml-layer ng-if="showBatiment" url="https://mhack-gaubey.firebaseapp.com/assets/kml/batiment.kml" ></kml-layer>-->
-	<!--<kml-layer ng-if="showperimetreUrbain" url="https://mhack-gaubey.firebaseapp.com/assets/kml/perimetreurbain.kml" ></kml-layer>-->
 	<kml-layer ng-if="showPistCyclable" url="https://mhack-gaubey.firebaseapp.com/assets/kml/pistecyclable.kml" ></kml-layer>
 	<kml-layer ng-if="showSentierPedestre" url="https://mhack-mike.firebaseapp.com/assets/kml/sentier-pedestre.kmz" ></kml-layer>
-	<!--<kml-layer ng-if="showZoneInondable" url="https://mhack-gaubey.firebaseapp.com/assets/kml/zoneinondable.kml" ></kml-layer>-->
 </ng-map>
 
 <div layout-align="end end" class="bottom-left">
@@ -41,10 +43,10 @@
 			<md-button class="md-fab" style="background-color:rgb(28,117,188);" ng-click="showSentierPedestre = !showSentierPedestre">
 				<md-icon md-svg-icon="maps:ic_directions_walk_24px"></md-icon>
 			</md-button>
-			<md-button class="md-fab" style="background-color:rgb(240,78,52);" ng-click="showperimetreUrbain = !showperimetreUrbain">
+			<md-button class="md-fab" style="background-color:rgb(240,78,52);" ng-click="showItemsNearMe()">
 				<md-icon md-svg-icon="alert:ic_error_24px"></md-icon>
 			</md-button>
-			<md-button class="md-fab" style="background-color:rgb(154,217,231);" ng-click="showPistCyclable = !showPistCyclable">
+			<md-button class="md-fab" style="background-color:rgb(154,217,231);" ng-click="showZap()">
 				<md-icon md-svg-icon="notification:ic_wifi_24px"></md-icon>
 			</md-button>
 		</md-fab-actions>

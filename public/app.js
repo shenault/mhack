@@ -10,6 +10,7 @@
 			'satellizer',
 			'ui.router',
 			'google.utils',
+			'zap.utils',
 			'user.svc'
 		])
 

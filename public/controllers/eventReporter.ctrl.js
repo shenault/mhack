@@ -9,7 +9,8 @@
 			'$scope',
 			'$mdSidenav',
 			'GoogleUtils',
-			function($scope, $mdSidenav, GoogleUtils) {
+			'ZapUtils',
+			function($scope, $mdSidenav, GoogleUtils, ZapUtils) {
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();
@@ -120,6 +121,22 @@
 				};
 
 				$scope.setupScope();
+
+				$scope.showItemsNearMe = function() {
+					if ($scope.events) {
+						$scope.events = null;
+					} else {
+						$scope.events = GoogleUtils.getItemListNearMe($scope.lat, $scope.lng, 10000);
+					}
+				};
+
+				$scope.showZap = function() {
+					if ($scope.zaps) {
+						$scope.zaps = null;
+					} else {
+						$scope.zaps = ZapUtils.getZapAccessPoint();
+					}
+				};
 
 				$scope.showPosition = function (position) {
 					$scope.lat = position.coords.latitude;

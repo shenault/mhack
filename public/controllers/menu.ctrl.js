@@ -14,6 +14,8 @@
 			'$window',
 			'$mdSidenav',
 			function($auth, $scope,$rootScope, $state, $q, $window, $mdSidenav) {
+				$scope.$state= $state;
+
 				$scope.goToState = function(state) {
 					$scope.state = state;
 					$state.go(state);
@@ -45,7 +47,6 @@
 					$rootScope.$broadcast('addEvent', {});
 					$mdSidenav('addEventSideNav').toggle();
 				};
-
 
 				$scope.setupScope();
 			}]);

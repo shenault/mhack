@@ -11,7 +11,8 @@
 			'ui.router',
 			'google.utils',
 			'zap.utils',
-			'user.svc'
+			'user.svc',
+			'pascalprecht.translate'
 		])
 
 		.config(function($mdIconProvider) {

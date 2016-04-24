@@ -12,7 +12,8 @@
 			'$mdSidenav',
 			'ENV',
             'GoogleUtils',
-			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV, GoogleUtils) {
+			'$translate',
+			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV, GoogleUtils, $translate) {
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
 					$scope.editMode = false;
@@ -71,6 +72,10 @@
 					$scope.lng = null;
 				};
 
+				$scope.updateLocationName = function() {
+					var locationName = GoogleUtils.geocodeLatLng($scope.lat, $scope.lng, $scope.locationName);
+				};
+
 				$scope.uploadFile = function(callback) {
 					if ($scope.file) {
 						EXIF.getData($scope.file, function() {
@@ -127,6 +132,8 @@
 				$scope.setPosition = function (position) {
 					$scope.lat = position.coords.latitude;
 					$scope.lng = position.coords.longitude;
+
+					$scope.updateLocationName();
 				};
 
 				$scope.showError = function (error) {
@@ -150,6 +157,15 @@
 				};
 
 				$scope.getLocation = function () {
+					if ($scope.file) {
+						EXIF.getData($scope.file, function() {
+							$scope.latGpsRef = EXIF.getTag(this, "GPSLatitudeRef");
+							$scope.latGps = EXIF.getTag(this, "GPSLatitude");
+							$scope.lngGpsRef = EXIF.getTag(this, "GPSLongitudeRef");
+							$scope.lngGps = EXIF.getTag(this, "GPSLongitude");
+						});
+					}
+
 					if (navigator.geolocation) {
 						navigator.geolocation.getCurrentPosition($scope.setPosition, $scope.showError);
 					}
@@ -161,7 +177,6 @@
 				};
 
 				$scope.setupScope();
-
 
 				/**
 				 * SUBSCRIBERS
@@ -214,8 +229,10 @@
 							"descFr" : "Evenement",
 							"uuid": "UUID4"
 						}];
-					//$scope.getLocation();
-                    //$scope.typeList = GoogleUtils.getTypeList($scope.lat, $scope.lng);
                 });
+
+				$scope.$on('reverseGeocode', function (event, data) {
+					$scope.locationName = data.locationName;
+				});
 			}]);
 })(angular);

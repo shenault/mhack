@@ -2,20 +2,21 @@
 
 	<custom-marker ng-if="showItems" ng-repeat="event in events track by $index"
 			on-click="editEvent({{event}})"
-			position="{{event.lat}}, {{event.lng}}">
+			position="{{event.lat}}, {{event.lng}}"
+			class="marker-event">
 		<div id="custom-marker-{{$index}}">
 			<img src="assets/img/pin_event.png">
 		</div>
 	</custom-marker>
 
-	<custom-marker ng-if="showZapSpot" 	ng-repeat="zap in zaps"	position="{{zap.pos}}">
+	<custom-marker ng-if="showZapSpot" 	ng-repeat="zap in zaps"	position="{{zap.pos}}" class="marker-zap">
 		<div>
 			<img src="assets/img/pin_zap.png">
 		</div>
 	</custom-marker >
 
-	<custom-marker position="{{lat}}, {{lng}}">
-		<div id="me" class="hoverTheTop">
+	<custom-marker position="{{lat}}, {{lng}}" class="marker-me">
+		<div id="me">
 			<img src="assets/img/pin_me.png">
 		</div>
 	</custom-marker>

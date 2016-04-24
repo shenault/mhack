@@ -47,7 +47,7 @@
 				<md-input-container>
 					<label>{{'type' | translate}}</label>
 					<md-select ng-model="event.type" ng-disabled="editMode">
-						<md-option ng-repeat="type in typeList" ng-value="type.uuid" ng-disabled="$index === 1">
+						<md-option ng-repeat="type in typeList" ng-value="type.uuid" >
 							{{language == 'fr'  ? type.descFr : type.descEn }}
 						</md-option>
 					</md-select>

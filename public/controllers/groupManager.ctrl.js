@@ -11,19 +11,7 @@
 			'GoogleUtils',
 			function($firebaseArray,$scope,GoogleUtils) {
 				$scope.getItemListNearMe = function() {
-					GoogleUtils.getTypeList( -71.9114811862039 , 45.4147936304428);
-				};
-				
-				$scope.isInPolygon = function() {
-					var polygon = new google.maps.Polygon({
-						paths: [
-							new google.maps.LatLng(25.774, -80.190),
-							new google.maps.LatLng(18.466, -66.118),
-							new google.maps.LatLng(32.321, -64.757)
-						]
-					});
-					GoogleUtils.isInPolygon(24.886, -70.269, polygon);
-					GoogleUtils.isInPolygon(0, 0, polygon);
+					GoogleUtils.getItemListNearMe( -71.920 , 45.385);
 				};
 				
 				$scope.setupScope = function() {

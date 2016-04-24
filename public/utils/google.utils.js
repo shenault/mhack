@@ -98,7 +98,7 @@
 						var self = this;
 						var returnValue = [];
 
-						ref.orderByKey().on("value", function(snapshot) {
+						ref.orderByChild("resolvedDate").equalTo(null).on("value", function(snapshot) {
 							snapshot.forEach(function(data) {
 								if (meters >= self.getDistanceFromLatLonInMeter(lat,lng, data.val().lat,data.val().lng)) {
 									returnValue.push(data.val());

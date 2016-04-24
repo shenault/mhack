@@ -4,6 +4,8 @@
 <Document>
 <name>Arrondissement</name>
 <visibility>1</visibility>
+<color>ffffffff</color>
+<colorMode>normal</colorMode>
 <Schema name="Arrondissement" id="kml_schema_ft_Arrondissement">
 <SimpleField type="xsd:short" name="CODEID"/>
 <SimpleField type="xsd:string" name="NOM"/>

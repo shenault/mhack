@@ -9,7 +9,8 @@
 			'$auth',
 			'$scope',
 			'$state',
-			function($auth, $scope, $state) {
+			'$window',
+			function($auth, $scope, $state, $window) {
 				$scope.authenticate = function(provider) {
 					$auth.authenticate(provider).then(function(boo) {
 						console.log(boo);
@@ -25,11 +26,24 @@
 				$scope.setupScope = function() {
 					$scope.state = 'eventReporter';
 					$scope.menuOpened = false;
+					$scope.isOpened = false;
 				};
 
 				$scope.toggleMenu = function() {
 					$scope.menuOpened = !$scope.menuOpened;
 				};
+
+				angular.element($window).bind('resize', function() {
+					setTimeout(function(){
+						if((window.innerHeight <= 700)  && ($window.innerWidth / $window.innerHeight) > 1) {
+							$scope.direction ="right";
+						} else {
+							$scope.direction = "up";
+						}
+						$scope.$digest();
+					},100)
+				});
+
 
 				$scope.setupScope();
 			}]);

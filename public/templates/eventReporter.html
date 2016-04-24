@@ -11,6 +11,8 @@
 				<span class="uppercase">{{'missionStatement' | translate}}</span>
 			</h2>
 			<span flex class=flex"></span>
+			<img class="user-picture" ng-if="user.picture" src="{{user.picture}}" height="32" width="32">
+			<span hide-xs class="md-subhead user-name">{{user.userName}}</span>
 			<md-button class="md-icon-button" ng-click="recenter()" aria-label="{{'recenter' | translate}}">
 				<md-icon md-svg-icon="maps:ic_my_location_24px"></md-icon>
 			</md-button>
@@ -33,11 +35,11 @@
 					<md-button class="md-icon-button" aria-label="{{'save' | translate}}" ng-hide="editMode" ng-click="save()">
 						<md-icon md-svg-icon="content:ic_save_24px"></md-icon>
 					</md-button>
-					
+
 					<md-button class="md-icon-button" aria-label="{{'confirm' | translate}}" ng-show="editMode" ng-click="confirm()">
 						<md-icon md-svg-icon="action:ic_thumb_up_24px"></md-icon>
 					</md-button>
-					
+
 					<span ng-show="editMode">({{ event.reportCount }})</span>
 				</div>
 			</md-toolbar>

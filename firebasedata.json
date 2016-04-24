@@ -14,11 +14,6 @@
       "userName" : "RouteVerteManager",
       "email" : "routeverte@gmail.com",
       "googleToken":"google"
-    },
-    "user-nmichaud-uuid" : {
-      "userName" : "Nicolas Michaud",
-      "email" : "nmichaud@omnimed.com",
-      "googleToken":"google"
     }
   },
   "item" : {

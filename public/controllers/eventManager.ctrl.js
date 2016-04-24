@@ -7,10 +7,7 @@
 
 		.controller('EventManagerController', [
 			'$scope',
-			'user',
-			function($scope, user) {
-				console.log(user);
-
+			function($scope) {
 				$scope.setupScope = function() {
 					$scope.label = "Event manager";
 				};

@@ -83,3 +83,7 @@ body, html {
 .pickle-gif{
     background-image: url(../img/pickle.gif);
 }
+
+.fullHeight {
+	height: 100%;
+}

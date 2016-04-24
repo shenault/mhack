@@ -43,7 +43,7 @@
 					templateUrl: "templates/login.html"
 				})
 				.state('eventReporter', {
-					controller: "EventReporterController as mapCtrl",
+					controller: "EventReporterController",
 					resolve: {
 						loginRequired: loginRequired,
 						user: ['loginRequired', 'UserService', function(loginRequired, UserService) {

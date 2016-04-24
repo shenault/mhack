@@ -129,8 +129,22 @@
 
 					deg2rad : function(deg) {
 						return deg * (Math.PI/180)
-					}
+					},
 
+                    geocodeLatLng : function(lat, lng) {
+                        var latlng = {lat: parseFloat(lat), lng: parseFloat(lng)};
+                        var geocoder = new google.maps.Geocoder;
+
+                        geocoder.geocode({'location': latlng}, function(results, status) {
+                            if (status === google.maps.GeocoderStatus.OK) {
+                                if (results[1]) {
+                                    return results[1].formatted_address;
+                                } else {
+                                    return "";
+                                }
+                            }
+                        });
+                    }
 				};
 			}]);
 

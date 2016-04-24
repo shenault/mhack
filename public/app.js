@@ -35,7 +35,7 @@
 		})
 
 		.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
-			$urlRouterProvider.otherwise('/login');
+			$urlRouterProvider.otherwise('/eventReporter');
 			$stateProvider
 				.state('login', {
 					controller: "LoginController",
@@ -45,23 +45,49 @@
 				.state('eventReporter', {
 					controller: "EventReporterController",
 					resolve: {
+						loginRequired: loginRequired,
 						user: ['UserService', function(UserService) {
-							return UserService.resolveUser();
+							return UserService.resolveUser() ;
 						}]
 					},
-					url: "/",
+					url: "/eventReporter",
 					templateUrl: "templates/eventReporter.html"
 				})
 				.state('eventManager', {
 					controller: "EventManagerController",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser() ;
+						}]
+					},
 					url: "/eventManager",
 					templateUrl: "templates/eventManager.html"
 				})
 				.state('groupManager', {
 					controller: "GroupManagerController",
+					resolve: {
+						loginRequired: loginRequired,
+						user: ['UserService', function(UserService) {
+							return UserService.resolveUser() ;
+						}]
+					},
 					url: "/groupManager",
 					templateUrl: "templates/groupManager.html"
 				});
+
+				function loginRequired($q, $location, ENV, $firebaseAuth) {
+					var deferred = $q.defer();
+					var ref = new Firebase(ENV.dbHost);
+					var auth = $firebaseAuth(ref);
+
+					if (auth.$getAuth()) {
+						deferred.resolve();
+					} else {
+						$location.path('/login');
+					}
+					return deferred.promise;
+				}
 		})
 
         .config(function($mdThemingProvider) {

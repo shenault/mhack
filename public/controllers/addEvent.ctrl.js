@@ -48,7 +48,7 @@
 						lng: $scope.getLng(),
 						createdDate: $scope.createdDate,
 						type: $scope.event.type,
-						desc: $scope.event.description,
+						description: $scope.event.description,
 						reportCount: 1
 					});
 					$scope.flushData();

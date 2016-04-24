@@ -13,7 +13,7 @@
 			'ENV',
 			function($auth, $http, $q, $rootScope, $firebaseArray, $firebaseAuth, ENV) {
 				var currentUser = null;
-				var ref = new Firebase("https://mhack-nmichaud.firebaseio.com");
+				var ref = new Firebase(ENV.dbHost);
 				var auth = $firebaseAuth(ref);
 
 				return {

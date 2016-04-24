@@ -80,3 +80,7 @@ body, html {
 .collaboratio-signature:hover {
     cursor:hand;
 }
+
+.uppercase {
+    text-transform: uppercase;
+}

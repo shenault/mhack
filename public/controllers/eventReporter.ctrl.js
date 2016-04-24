@@ -8,8 +8,8 @@
 		.controller('EventReporterController', [
 			'$scope',
 			'$mdSidenav',
-			function($scope, $mdSidenav) {
-
+			'GoogleUtils',
+			function($scope, $mdSidenav, GoogleUtils) {
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();

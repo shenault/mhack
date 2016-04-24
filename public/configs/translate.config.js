@@ -17,6 +17,7 @@
 					'menu.eventReporter' : 'Report an event',
 					'menu.eventManager' : 'Resolve an event',
 					'menu.groupManager' : 'Manage groups',
+					missionStatement : 'Together for an improved city',
 					save : 'Save',
 					title: 'Hello',
 					type: 'Type',
@@ -33,13 +34,14 @@
 					'menu.eventReporter' : 'Rapporter un événement',
 					'menu.eventManager' : 'Résoudre un événement',
 					'menu.groupManager' : 'Gérer les groupes',
+					missionStatement : 'Ensemble pour une ville améliorée',
 					save : 'Sauvegarder',
 					title: 'Allo',
 					type: 'Type',
 					uploadImage: 'Téléverser une image'
 				});
 
-				$translateProvider.preferredLanguage(locale);
+				$translateProvider.preferredLanguage(locale.substring(0, 2));
 			}
 		]);
 })(angular);

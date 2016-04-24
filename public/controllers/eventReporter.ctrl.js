@@ -118,7 +118,7 @@
 				};
 
 				$scope.editEvent = function(event) {
-					$rootScope.$broadcast('edit', $scope.events[parseInt(event.currentTarget.childNodes[1].id.replace('custom-marker-', '') - 1)]);
+					$rootScope.$broadcast('edit', $scope.events[parseInt(event.currentTarget.childNodes[1].id.replace('custom-marker-', ''))]);
 					$mdSidenav('addEventSideNav').toggle();
 				};
 

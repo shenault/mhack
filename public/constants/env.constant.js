@@ -6,7 +6,7 @@
 		.module('collaboratio.app')
 
 		.constant('ENV', {
-			dbHost: 'https://mhack-nmichaud.firebaseio.com'
+			dbHost: 'https://collaboratiohack.firebaseio.com'
 		});
 
 })(angular);

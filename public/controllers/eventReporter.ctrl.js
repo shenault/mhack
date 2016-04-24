@@ -211,6 +211,7 @@
 
 				NgMap.getMap().then(function(map) {
 					$scope.map = map;
+					google.maps.event.trigger($scope.map,'resize');
 				});
 
 				$scope.getLocation();

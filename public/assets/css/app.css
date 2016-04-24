@@ -3,6 +3,11 @@ body, html {
     width: 100%;
 }
 
+.bottom-left {
+    position: absolute;
+    left: 2%;
+    bottom: 24px;
+}
 
 .bottom-right {
     position: fixed;

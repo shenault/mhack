@@ -13,16 +13,19 @@
 	<md-content>
 		<md-list flex>
 			<md-list-item class="md-2-line" ng-class="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="goToState('eventReporter')">
-				<md-icon md-svg-icon="action:ic_dashboard_24px"></md-icon><p>{{'menu.eventReporter' | translate}}</p>
+				<md-icon class="list-icon" md-svg-icon="action:ic_dashboard_24px"></md-icon><p>{{'menu.eventReporter' | translate}}</p>
 			</md-list-item>
-			<md-list-item class="md-3-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
-				<md-icon md-svg-icon="action:ic_settings_24px"></md-icon><p>{{'menu.groupManager' | translate}}</p>
-			</md-list-item>
-			<md-divider></md-divider>
-			<md-subheader>{{'menu.action' | translate}}</md-subheader>
-			<md-list-item class="md-3-line" ng-if="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="reportEvent();">
-				<md-icon md-svg-icon="content:ic_add_box_24px"></md-icon><p>{{'menu.createEvent' | translate}}</p>
-			</md-list-item>
+
+			<div ng-if="!$state.includes('login')">
+				<md-list-item class="md-2-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
+					<md-icon class="list-icon" md-svg-icon="action:ic_settings_24px"></md-icon><p>{{'menu.groupManager' | translate}}</p>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-subheader>{{'menu.action' | translate}}</md-subheader>
+				<md-list-item class="md-2-line" ng-if="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="reportEvent();">
+					<md-icon class="list-icon" md-svg-icon="content:ic_add_box_24px"></md-icon><p>{{'menu.createEvent' | translate}}</p>
+				</md-list-item>
+			</div>
 		</md-list>
 	</md-content>
 </md-sidenav>

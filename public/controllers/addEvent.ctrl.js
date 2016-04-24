@@ -9,7 +9,8 @@
 			'$firebaseArray',
 			'$scope',
 			'$mdSidenav',
-			function($firebaseArray, $scope, $mdSidenav) {
+			'ENV',
+			function($firebaseArray, $scope, $mdSidenav,ENV) {
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
 					if (!inSaving)
@@ -37,7 +38,7 @@
 				};
 
 				$scope.setupScope = function() {
-					var ref = new Firebase("https://mhack-gaubey.firebaseio.com/item");
+					var ref = new Firebase(ENV.dbHost + "/item");
 					$scope.items = $firebaseArray(ref);
 					$scope.flushData();
 					$scope.getLocation();

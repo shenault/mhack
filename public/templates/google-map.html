@@ -21,32 +21,32 @@
 			Lng: {{anchor.getPosition().lng()}}<br/>
 		</div>
 	</info-window>
-	<kml-layer ng-if="showAireAmenagee" url="https://mhack-gaubey.firebaseapp.com/assets/kml/aireamenagee.kml" ></kml-layer>
-	<kml-layer ng-if="showPistCyclable" url="https://mhack-gaubey.firebaseapp.com/assets/kml/pistecyclable.kml" ></kml-layer>
-	<kml-layer ng-if="showSentierPedestre" url="https://mhack-mike.firebaseapp.com/assets/kml/sentier-pedestre.kmz" ></kml-layer>
+	<kml-layer ng-if="showAireAmenagee" url="https://collatiohack.firebaseapp.com/assets/kml/aireamenagee.kml" ></kml-layer>
+	<kml-layer ng-if="showPistCyclable" url="https://collatiohack.firebaseapp.com/assets/kml/pistecyclable.kml" ></kml-layer>
+	<kml-layer ng-if="showSentierPedestre" url="https://collatiohack.firebaseapp.com/assets/kml/sentier-pedestre.kmz" ></kml-layer>
 </ng-map>
 
 <div layout-align="end end" class="bottom-left">
-	<md-fab-speed-dial md-open="isOpen"  md-direction="{{direction}}">
+	<md-fab-speed-dial md-open="isOpen"  md-direction="{{direction}}" ng-class="md-fling ">
 		<md-fab-trigger>
 			<md-button aria-label="menu" class="md-fab md-warn">
 				<md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
 			</md-button>
 		</md-fab-trigger>
-		<md-fab-actions>
-			<md-button class="md-fab" style="background-color:rgb(0,186,197);" ng-click="showPistCyclable = !showPistCyclable">
+		<md-fab-actions ng-show="isOpen">
+			<md-button aria-label="PisteCyclable" class="md-fab  md-raised md-mini" ng-style="{'background-color': showPistCyclable ?  'rgb(0,186,197)' : 'rgb(232,232,232)' }" ng-click="showPistCyclable = !showPistCyclable;" >
 				<md-icon md-svg-src="maps:ic_directions_bike_24px"></md-icon>
 			</md-button>
-			<md-button class="md-fab" style="background-color:rgb(215,223,35);" ng-click="showAireAmenagee = !showAireAmenagee">
+			<md-button aria-label="AireAmenagee" class="md-fab md-raised md-mini" ng-style="{'background-color':showAireAmenagee ?  'rgb(215,223,35)' : 'rgb(232,232,232)' }" ng-click="showAireAmenagee = !showAireAmenagee;" >
 				<md-icon md-svg-icon="image:ic_nature_24px"></md-icon>
 			</md-button>
-			<md-button class="md-fab" style="background-color:rgb(28,117,188);" ng-click="showSentierPedestre = !showSentierPedestre">
+			<md-button aria-label="SentierPedestre" class="md-fab md-raised md-mini" ng-style="{'background-color':showSentierPedestre ?  'rgb(28,117,188)' : 'rgb(232,232,232)' }" ng-click="showSentierPedestre = !showSentierPedestre;">
 				<md-icon md-svg-icon="maps:ic_directions_walk_24px"></md-icon>
 			</md-button>
-			<md-button class="md-fab" style="background-color:rgb(240,78,52);" ng-click="showItemsNearMe()">
+			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': events ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItemsNearMe();">
 				<md-icon md-svg-icon="alert:ic_error_24px"></md-icon>
 			</md-button>
-			<md-button class="md-fab" style="background-color:rgb(154,217,231);" ng-click="showZap()">
+			<md-button aria-label="ZAP" class="md-fab md-raised md-mini" ng-style="{'background-color': zaps  ?  'rgb(154,217,231)' : 'rgb(232,232,232)'}" ng-click="showZap();">
 				<md-icon md-svg-icon="notification:ic_wifi_24px"></md-icon>
 			</md-button>
 		</md-fab-actions>

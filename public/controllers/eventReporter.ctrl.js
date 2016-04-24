@@ -120,6 +120,8 @@
 					$scope.showPistCyclable = true;
 					$scope.showSentierPedestre = true;
 					$scope.showZoneInondable = true;
+					$scope.direction = "up";
+					$scope.isOpen = "true";
 				};
 
 				$scope.setupScope();

@@ -11,7 +11,8 @@
 			'$state',
 			'$q',
 			'$window',
-			function($auth, $scope, $state, $q, $window) {
+			'$mdSidenav',
+			function($auth, $scope, $state, $q, $window, $mdSidenav) {
 				$scope.goToState = function(state) {
 					$scope.state = state;
 					$state.go(state);
@@ -24,8 +25,8 @@
 					$scope.isOpened = false;
 				};
 
-				$scope.toggleMenu = function() {
-					$scope.menuOpened = !$scope.menuOpened;
+				$scope.toggleSideNav = function(menuId) {
+					$mdSidenav(menuId).toggle();
 				};
 
 				angular.element($window).bind('resize', function() {

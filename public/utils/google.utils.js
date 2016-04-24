@@ -60,7 +60,7 @@
 
 											if (amIinZone) {
 												//return all type of the group
-												for (var i=0; i >= data.val().type.length; i++){
+												for (var i=0; i < data.val().type.length; i++){
 													returnValueKey.push(data.val().type[i]);
 												}
 											}
@@ -75,10 +75,12 @@
 
 						//get type
 						var refType = new Firebase(ENV.dbHost + "/type");
-
+						
 						for (var i = 0; i < returnValueKey.length;i++) {
 							refType.orderByKey().equalTo(returnValueKey[i]).on("value", function (snapshot) {
-								returnValue.push(snapshot.val());
+								snapshot.forEach(function(data) {
+									returnValue.push(data.val());
+								})
 							});
 						}
 						return returnValue

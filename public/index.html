@@ -13,33 +13,8 @@
 		<link rel="shortcut icon" sizes="196x196" href="assets/img/collaboratio-192x192.png">
 		<title>Collaboratio</title>
 	</head>
-	<body layout="row" ng-controller="MenuController">
-		<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-			<md-toolbar class="md-hue-2">
-				<div class="md-toolbar-tools">
-					<h2>
-						<a href="http://devpost.com/software/collaboratio" target="_blank"><img src="assets/img/collaboratio-signature.png" class="collaboratio-signature" alt="Collaboratio"></a>
-					</h2>
-				</div>
-			</md-toolbar>
-			<md-content>
-				<md-list flex>
-					<md-list-item class="md-3-line" ng-class="(state == 'eventReporter' ? 'menu-selected' : '')" ng-click="goToState('eventReporter')">
-						{{'menu.eventReporter' | translate}}
-					</md-list-item>
-					<md-list-item class="md-3-line" ng-class="(state == 'eventManager' ? 'menu-selected' : '')" ng-click="goToState('eventManager')">
-						{{'menu.eventManager' | translate}}
-					</md-list-item>
-					<md-list-item class="md-3-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
-						{{'menu.groupManager' | translate}}
-					</md-list-item>
-				</md-list>
-				<md-divider></md-divider>
-				<md-button class="md-primary" ng-click="toggleMenu()">
-					{{'close' | translate}}
-				</md-button>
-			</md-content>
-		</md-sidenav>
+	<body layout="row">
+		<div ng-controller="MenuController" ng-include="'templates/menu.html'"></div>
 		<div layout="column" class="relative" layout-fill role="main" ui-view></div>
 	</body>
 

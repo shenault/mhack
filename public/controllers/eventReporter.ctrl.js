@@ -110,6 +110,13 @@
 
 				$scope.setupScope = function() {
 					$scope.label = "Event reporter";
+					$scope.showAireAmenagee = true;
+					$scope.showArrondissement = true;
+					$scope.showBatiment = true;
+					$scope.showperimetreUrbain = true;
+					$scope.showPistCyclable = true;
+					$scope.showSentierPedestre = true;
+					$scope.showZoneInondable = true;
 				};
 
 				$scope.setupScope();

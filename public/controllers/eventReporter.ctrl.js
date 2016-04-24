@@ -129,13 +129,13 @@
 
 				$scope.setupScope = function() {
 					$scope.label = "Event reporter";
-					$scope.showAireAmenagee = true;
-					$scope.showItems = false;
+					$scope.showAireAmenagee = false;
+					$scope.showItems = true;
 					$scope.showZapSpot = false;
-					$scope.showperimetreUrbain = true;
-					$scope.showPistCyclable = true;
-					$scope.showSentierPedestre = true;
-					$scope.showZoneInondable = true;
+					$scope.showperimetreUrbain = false;
+					$scope.showPistCyclable = false;
+					$scope.showSentierPedestre = false;
+					$scope.showZoneInondable = false;
 					$scope.direction = "up";
 					$scope.isOpen = "true";
 				};

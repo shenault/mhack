@@ -14,6 +14,12 @@
 		</div>
 	</custom-marker >
 
+	<custom-marker position="{{lat}}, {{lng}}">
+		<div id="me" class="hoverTheTop">
+			<img src="assets/img/pin_me.png">
+		</div>
+	</custom-marker>
+
 	<info-window id="foo" on-mouseover="vm.mouseover()">
 		<div ng-non-bindable="">
 			Lat: {{anchor.getPosition().lat()}}<br/>
@@ -42,10 +48,10 @@
 			<md-button aria-label="SentierPedestre" class="md-fab md-raised md-mini" ng-style="{'background-color':showSentierPedestre ?  'rgb(28,117,188)' : 'rgb(232,232,232)' }" ng-click="showSentierPedestre = !showSentierPedestre;">
 				<md-icon md-svg-icon="maps:ic_directions_walk_24px"></md-icon>
 			</md-button>
-			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': showItems ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItems = !showItems;showItemsNearMe();">
+			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': showItems ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItems = !showItems;">
 				<md-icon md-svg-icon="alert:ic_error_24px"></md-icon>
 			</md-button>
-			<md-button aria-label="ZAP" class="md-fab md-raised md-mini" ng-style="{'background-color': showZapSpot  ?  'rgb(154,217,231)' : 'rgb(232,232,232)'}" ng-click="showZapSpot= !showZapSpot;showZap();">
+			<md-button aria-label="ZAP" class="md-fab md-raised md-mini" ng-style="{'background-color': showZapSpot  ?  'rgb(154,217,231)' : 'rgb(232,232,232)'}" ng-click="showZap();">
 				<md-icon md-svg-icon="notification:ic_wifi_24px"></md-icon>
 			</md-button>
 		</md-fab-actions>

@@ -1,6 +1,6 @@
 <ng-map style="height:calc(100% - 64px);width:100%" center="[{{lat}}, {{lng}}]" styles="{{ styles }}">
 
-	<custom-marker ng-repeat="event in events track by $index"
+	<custom-marker ng-if="showItems" ng-repeat="event in events track by $index"
 			on-click="editEvent({{$index}})"
 			position="{{event.lat}}, {{event.lng}}">
 		<div id="custom-marker-{{$index}}">
@@ -8,7 +8,7 @@
 		</div>
 	</custom-marker>
 
-	<custom-marker 	ng-repeat="zap in zaps"	position="{{zap.pos}}">
+	<custom-marker ng-if="showZapSpot" 	ng-repeat="zap in zaps"	position="{{zap.pos}}">
 		<div>
 			<img src="assets/img/pin_zap.png">
 		</div>
@@ -42,10 +42,10 @@
 			<md-button aria-label="SentierPedestre" class="md-fab md-raised md-mini" ng-style="{'background-color':showSentierPedestre ?  'rgb(28,117,188)' : 'rgb(232,232,232)' }" ng-click="showSentierPedestre = !showSentierPedestre;">
 				<md-icon md-svg-icon="maps:ic_directions_walk_24px"></md-icon>
 			</md-button>
-			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': events ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItemsNearMe();">
+			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': showItems ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItems = !showItems;showItemsNearMe();">
 				<md-icon md-svg-icon="alert:ic_error_24px"></md-icon>
 			</md-button>
-			<md-button aria-label="ZAP" class="md-fab md-raised md-mini" ng-style="{'background-color': zaps  ?  'rgb(154,217,231)' : 'rgb(232,232,232)'}" ng-click="showZap();">
+			<md-button aria-label="ZAP" class="md-fab md-raised md-mini" ng-style="{'background-color': showZapSpot  ?  'rgb(154,217,231)' : 'rgb(232,232,232)'}" ng-click="showZapSpot= !showZapSpot;showZap();">
 				<md-icon md-svg-icon="notification:ic_wifi_24px"></md-icon>
 			</md-button>
 		</md-fab-actions>

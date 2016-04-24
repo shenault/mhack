@@ -214,6 +214,23 @@
 					google.maps.event.trigger($scope.map,'resize');
 				});
 
+				$scope.dynMarkers = []
+				NgMap.getMap().then(function(map) {
+					var bounds = new google.maps.LatLngBounds();
+					for (var k in map.customMarkers) {
+						var cm = map.customMarkers[k];
+
+						if (cm.class =="marker-event"){
+							$scope.dynMarkers.push(cm);
+							bounds.extend(cm.getPosition());
+						}
+					};
+
+					$scope.markerClusterer = new MarkerClusterer(map, $scope.dynMarkers, {});
+					map.setCenter(bounds.getCenter());
+					map.fitBounds(bounds);
+				});
+
 				$scope.getLocation();
 			}]);
 

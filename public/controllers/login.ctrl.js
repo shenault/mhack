@@ -23,5 +23,10 @@
 						$state.go('eventReporter');
 					});
 				};
+
+				$scope.bypassLogin = function() {
+					$rootScope.isBypassLogin = true;
+					$state.go('eventReporter');
+				}
 			}]);
 })(angular);

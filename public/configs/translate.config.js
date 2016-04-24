@@ -41,7 +41,7 @@
 					uploadImage: 'Téléverser une image'
 				});
 
-				$translateProvider.preferredLanguage(locale);
+				$translateProvider.preferredLanguage(locale.substring(0, 2));
 			}
 		]);
 })(angular);

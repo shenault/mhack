@@ -50,7 +50,7 @@
 						</md-option>
 					</md-select>
 				</md-input-container>
-				<img ng-show="file" ngf-thumbnail="file" class="thumb" />
+				<img id="thumbImage" ng-show="file" ngf-thumbnail="file" class="thumb" />
 				<button ng-click="close()" ng-show="file && !editMode">Remove</button>
 				<button type="file" ngf-select ng-model="file"
 						accept="image/*" ngf-max-size="10MB" ng-disabled="editMode"

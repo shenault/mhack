@@ -6,12 +6,13 @@
 		.module('collaboratio.app')
 
 		.controller('EventReporterController', [
+			'NgMap',
 			'$scope',
 			'$mdSidenav',
 			'$window',
 			'GoogleUtils',
 			'ZapUtils',
-			function($scope, $mdSidenav, $window, GoogleUtils, ZapUtils) {
+			function(NgMap, $scope, $mdSidenav, $window, GoogleUtils, ZapUtils) {
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();
@@ -123,11 +124,15 @@
 
 				$scope.setupScope();
 
-				$scope.showItemsNearMe = function() {
-					if ($scope.events) {
-						$scope.events = null;
+				$scope.showItemsNearMe = function(lat, lng) {
+					if (lat) {
+						$scope.events = GoogleUtils.getItemListNearMe(lat, lng, 10000);
 					} else {
-						$scope.events = GoogleUtils.getItemListNearMe($scope.lat, $scope.lng, 10000);
+						if ($scope.events) {
+							$scope.events = null;
+						} else {
+							$scope.events = GoogleUtils.getItemListNearMe($scope.lat, $scope.lng, 10000);
+						}
 					}
 				};
 
@@ -182,6 +187,15 @@
 						}
 						$scope.$digest();
 					},100)
+				});
+
+				NgMap.getMap().then(function(map) {
+					google.maps.event.addListener(map, 'dragend', function() {
+						setTimeout(function() {
+							$scope.showItemsNearMe();
+							$scope.$digest();
+						}, 500);
+					});
 				});
 
 				$scope.getLocation();

@@ -43,7 +43,7 @@
 					templateUrl: "templates/login.html"
 				})
 				.state('eventReporter', {
-					controller: "EventReporterController",
+					controller: "EventReporterController as mapCtrl",
 					resolve: {
 						user: ['UserService', function(UserService) {
 							return UserService.resolveUser();

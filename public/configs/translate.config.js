@@ -23,7 +23,8 @@
 					save : 'Save',
 					title: 'Hello',
 					type: 'Type',
-					uploadImage: 'Upload an image'
+					uploadImage: 'Upload an image',
+					Emplacement: 'Location name'
 				});
 				$translateProvider.translations('fr', {
 					add : 'Ajouter',
@@ -42,7 +43,8 @@
 					save : 'Sauvegarder',
 					title: 'Allo',
 					type: 'Type',
-					uploadImage: 'Téléverser une image'
+					uploadImage: 'Téléverser une image',
+					Emplacement: 'Emplacement'
 				});
 
 				$translateProvider.preferredLanguage(locale.substring(0, 2));

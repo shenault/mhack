@@ -114,8 +114,8 @@
 				$scope.setupScope = function() {
 					$scope.label = "Event reporter";
 					$scope.showAireAmenagee = true;
-					$scope.showArrondissement = true;
-					$scope.showBatiment = true;
+					$scope.showItems = false;
+					$scope.showZapSpot = false;
 					$scope.showperimetreUrbain = true;
 					$scope.showPistCyclable = true;
 					$scope.showSentierPedestre = true;
@@ -127,22 +127,23 @@
 				$scope.setupScope();
 
 				$scope.showItemsNearMe = function(lat, lng) {
-					if (lat) {
-						$scope.events = GoogleUtils.getItemListNearMe(lat, lng, 10000);
+					if ($scope.showItems) {
+						$scope.events = null;
 					} else {
-						if ($scope.events) {
-							$scope.events = null;
+						var distance = GoogleUtils.getDistanceFromLatLonInMeter($scope.map.getBounds().R.R, $scope.map.getBounds().j.R, $scope.map.getBounds().R.j, $scope.map.getBounds().j.j);
+						if (lat) {
+							$scope.events = GoogleUtils.getItemListNearMe(lat, lng, distance);
 						} else {
-							$scope.events = GoogleUtils.getItemListNearMe($scope.lat, $scope.lng, 10000);
+							$scope.events = GoogleUtils.getItemListNearMe($scope.lat, $scope.lng, distance);
 						}
 					}
 				};
 
 				$scope.showZap = function() {
-					if ($scope.zaps) {
-						$scope.zaps = null;
-					} else {
+					if ($scope.showZapSpot) {
 						$scope.zaps = ZapUtils.getZapAccessPoint();
+					} else {
+						$scope.zaps = null;
 					}
 				};
 
@@ -192,9 +193,11 @@
 				});
 
 				NgMap.getMap().then(function(map) {
+					$scope.map = map;
 					google.maps.event.addListener(map, 'dragend', function() {
+						var self = this;
 						setTimeout(function() {
-							$scope.showItemsNearMe();
+							$scope.showItemsNearMe(self.getCenter().lat(), self.getCenter().lng());
 							$scope.$digest();
 						}, 500);
 					});

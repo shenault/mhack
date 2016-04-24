@@ -44,7 +44,7 @@
 			<md-content layout-padding layout="column">
 				<md-input-container>
 					<label>{{'type' | translate}}</label>
-					<md-select ng-model="event.type">
+					<md-select ng-model="event.type" ng-disabled="editMode">
 						<md-option ng-repeat="type in typeList" ng-value="type.uuid" ng-disabled="$index === 1">
 							{{language == 'fr'  ? type.descFr : type.descEn }}
 						</md-option>
@@ -59,9 +59,6 @@
 					<label>{{'description' | translate}}</label>
 					<textarea ng-model="event.description" ng-disabled="editMode" md-maxlength="150" rows="5" md-select-on-focus></textarea>
 				</md-input-container>
-				<div>
-					<span>{{'location' | translate}} : TODO</span>
-				</div>
 				<md-button ng-click="save()" ng-hide="editMode" class="md-primary">
 					{{'save' | translate}}
 				</md-button>

@@ -15,6 +15,7 @@
 			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV, GoogleUtils) {
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
+					$scope.editMode = false;
 					if (!inSaving)
 						$scope.flushData();
 				};
@@ -40,7 +41,8 @@
 						lng: $scope.getLng(),
 						createdDate: $scope.createdDate,
 						type: $scope.event.type,
-						desc: $scope.event.description
+						desc: $scope.event.description,
+						reportCount: 1
 					});
 					$scope.flushData();
 				};
@@ -161,6 +163,8 @@
 
 					$scope.editMode = true;
 
+
+					$scope.event.description = arg.desc;
 					$scope.file = arg.picture;
 					$scope.lat = arg.lat;
 					$scope.lng = arg.lng;

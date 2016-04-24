@@ -79,3 +79,7 @@ body, html {
 .list-icon {
 	margin-top: 10px !important;
 }
+
+.pickle-gif{
+    background-image: url(../img/pickle.gif);
+}

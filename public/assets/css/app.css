@@ -23,6 +23,10 @@ body, html {
     background-image: url(../img/404.png);
 }
 
+.hoverTheTop {
+    z-index: 1000;
+}
+
 .login-section {
 	margin-left: auto;
 	margin-right: auto;

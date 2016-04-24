@@ -143,6 +143,7 @@
 				$scope.setupScope();
 
 				$scope.showZap = function() {
+					$scope.showZapSpot = !$scope.showZapSpot;
 					if ($scope.showZapSpot) {
 						$scope.zaps = ZapUtils.getZapAccessPoint();
 					} else {
@@ -194,6 +195,12 @@
 						$scope.$digest();
 					},100)
 				});
+
+				setTimeout(function(){
+					$scope.lat = position.coords.latitude;
+					$scope.lng = position.coords.longitude;
+					$scope.$digest();
+				},60000);
 
 				NgMap.getMap().then(function(map) {
 					$scope.map = map;

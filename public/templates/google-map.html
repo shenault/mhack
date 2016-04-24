@@ -1,10 +1,9 @@
 <ng-map style="height:calc(100% - 64px);width:100%" id="map" center="{{lat}}, {{lng}}" styles="{{ styles }}">
 
 	<custom-marker ng-repeat="event in events track by $index"
-			id="custom-marker-{{$index}}"
-			on-click=""
+			on-click="editEvent({{$index}})"
 			position="{{event.lat}}, {{event.lng}}">
-		<div>
+		<div id="custom-marker-{{$index}}">
 			<img src="assets/img/pin_event.png">
 		</div>
 	</custom-marker>

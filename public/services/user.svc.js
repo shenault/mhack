@@ -44,24 +44,28 @@
 						var ref = new Firebase(ENV.dbHost + "/user");
 						var self = this;
 
-						if (!currentUser) {
-							googleAuth = auth.$getAuth().google;
-							self.getUserByEmail(googleAuth.email).then(function (user) {
-								currentUser = {
-									email: googleAuth.email,
-									picture:googleAuth.profileImageURL,
-									userName: googleAuth.displayName
-								};
-								if (!user) {
-									$firebaseArray(ref).$add(currentUser);
-								} else {
-									currentUser = user;
-								}
-
-								deferred.resolve(currentUser);
-							});
+						if ($rootScope.isBypassLogin) {
+							deferred.resolve({});
 						} else {
-							deferred.resolve(currentUser);
+							if (!currentUser) {
+								googleAuth = auth.$getAuth().google;
+								self.getUserByEmail(googleAuth.email).then(function (user) {
+									currentUser = {
+										email: googleAuth.email,
+										picture:googleAuth.profileImageURL,
+										userName: googleAuth.displayName
+									};
+									if (!user) {
+										$firebaseArray(ref).$add(currentUser);
+									} else {
+										currentUser = user;
+									}
+
+									deferred.resolve(currentUser);
+								});
+							} else {
+								deferred.resolve(currentUser);
+							}
 						}
 
 						return deferred.promise;

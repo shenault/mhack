@@ -77,12 +77,12 @@
 					templateUrl: "templates/groupManager.html"
 				});
 
-				function loginRequired($q, $location, ENV, $firebaseAuth) {
+				function loginRequired($q, $location, ENV, $firebaseAuth, $rootScope) {
 					var deferred = $q.defer();
 					var ref = new Firebase(ENV.dbHost);
 					var auth = $firebaseAuth(ref);
 
-					if (auth.$getAuth()) {
+					if ($rootScope.isBypassLogin || auth.$getAuth()) {
 						deferred.resolve();
 					} else {
 						$location.path('/login');

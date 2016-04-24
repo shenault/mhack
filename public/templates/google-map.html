@@ -26,9 +26,9 @@
 			Lng: {{anchor.getPosition().lng()}}<br/>
 		</div>
 	</info-window>
-	<kml-layer clickable="false" ng-if="showAireAmenagee" url="https://collaboratiohack.firebaseapp.com/assets/kml/aireamenagee.kml" ></kml-layer>
-	<kml-layer clickable="false" ng-if="showPistCyclable" url="https://collaboratiohack.firebaseapp.com/assets/kml/pistecyclable.kml" ></kml-layer>
-	<kml-layer clickable="false" ng-if="showSentierPedestre" url="https://collaboratiohack.firebaseapp.com/assets/kml/sentier-pedestre.kmz" ></kml-layer>
+	<kml-layer clickable="false" ng-if="showAireAmenagee" preserve-viewport="true" url="https://collaboratiohack.firebaseapp.com/assets/kml/aireamenagee.kml" ></kml-layer>
+	<kml-layer clickable="false" ng-if="showPistCyclable" preserve-viewport="true" url="https://collaboratiohack.firebaseapp.com/assets/kml/pistecyclable.kml" ></kml-layer>
+	<kml-layer clickable="false" ng-if="showSentierPedestre" preserve-viewport="true" url="https://collaboratiohack.firebaseapp.com/assets/kml/sentier-pedestre.kmz" ></kml-layer>
 </ng-map>
 
 <div layout-align="end end" class="bottom-left">

@@ -1,3 +1,4 @@
 firebase.json
 /.idea/
 /.project
+/constants/env.constant.js

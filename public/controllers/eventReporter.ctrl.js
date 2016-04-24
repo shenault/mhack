@@ -197,9 +197,11 @@
 				});
 
 				setTimeout(function(){
-					$scope.lat = position.coords.latitude;
-					$scope.lng = position.coords.longitude;
-					$scope.$digest();
+					navigator.geolocation.getCurrentPosition(function(position) {
+						$scope.lat = position.coords.latitude;
+						$scope.lng = position.coords.longitude;
+						$scope.$digest();
+					});
 				},60000);
 
 				NgMap.getMap().then(function(map) {

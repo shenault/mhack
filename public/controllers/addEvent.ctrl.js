@@ -80,18 +80,23 @@
 							$scope.lngGpsRef = EXIF.getTag(this, "GPSLongitudeRef");
 							$scope.lngGps = EXIF.getTag(this, "GPSLongitude");
 							$scope.createdDate = EXIF.getTag(this, "DateTime");
-
-							var reader = new FileReader();
-							reader.onload = function(theFile) {
-								$scope.picture = theFile.target.result;
-								callback();
-							};
-
-							reader.readAsDataURL($scope.file);
+							$scope.picture = $scope.compressImage();
+							callback();
 						});
 					} else {
 						callback();
 					}
+				};
+
+				$scope.compressImage = function() {
+					var canvas = document.createElement('canvas');
+					var context = canvas.getContext('2d');
+
+					canvas.height = 280;
+					canvas.width = 280;
+
+					context.drawImage(document.getElementById('thumbImage'), 0, 0, 280, 280);
+					return	canvas.toDataURL("image/jpeg");
 				};
 
 				$scope.getLat = function() {

@@ -6,13 +6,14 @@
 		.module('collaboratio.app')
 
 		.controller('EventReporterController', [
-			'NgMap',
 			'$scope',
+			'$rootScope',
 			'$mdSidenav',
 			'$window',
 			'GoogleUtils',
 			'ZapUtils',
-			function(NgMap, $scope, $mdSidenav, $window, GoogleUtils, ZapUtils) {
+			'NgMap',
+			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils,NgMap) {
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();
@@ -108,6 +109,11 @@
 				}, {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#dadada"}, {"lightness": 17}]}];
 
 				$scope.addEvent = function() {
+					$mdSidenav('addEventSideNav').toggle();
+				};
+
+				$scope.editEvent = function(event) {
+					$rootScope.$broadcast('edit', $scope.events[parseInt(event.currentTarget.childNodes[1].id.replace('custom-marker-', '') - 1)]);
 					$mdSidenav('addEventSideNav').toggle();
 				};
 

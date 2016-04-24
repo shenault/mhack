@@ -8,9 +8,10 @@
 		.controller('AddEventController', [
 			'$firebaseArray',
 			'$scope',
+			'$rootScope',
 			'$mdSidenav',
 			'ENV',
-			function($firebaseArray, $scope, $mdSidenav,ENV) {
+			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV) {
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
 					if (!inSaving)
@@ -142,5 +143,14 @@
 				};
 
 				$scope.setupScope();
+
+
+				/**
+				 * SUBSCRIBERS
+				 */
+				$scope.$on('edit', function (event, arg) {
+					console.log("RECEIVED event type : " + arg.type);
+					$scope.event = arg;
+				});
 			}]);
 })(angular);

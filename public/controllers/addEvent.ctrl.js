@@ -19,11 +19,16 @@
 					if (!inSaving)
 						$scope.flushData();
 				};
-				
+
 				$scope.confirm = function() {
+					$scope.event.reportCount++;
+					$scope.events.$save($scope.event);
+					$scope.close();
 				};
-				
+
 				$scope.resolve = function() {
+					$scope.events.$remove($scope.event);
+					$scope.close();
 				};
 
 				$scope.save = function() {
@@ -36,7 +41,7 @@
 					if (!$scope.createdDate) $scope.createdDate = new Date();
 					if (!$scope.event.type) $scope.event.type = null;
 					if (!$scope.event.description) $scope.event.description = null;
-					$scope.items.$add({picture: $scope.picture,
+					$scope.events.$add({picture: $scope.picture,
 						lat: $scope.getLat(),
 						lng: $scope.getLng(),
 						createdDate: $scope.createdDate,
@@ -48,9 +53,7 @@
 				};
 
 				$scope.setupScope = function() {
-					var ref = new Firebase(ENV.dbHost + "/item");
 					$scope.editMode = false;
-					$scope.items = $firebaseArray(ref);
 					$scope.flushData();
 					$scope.getLocation();
 				};
@@ -161,14 +164,9 @@
 				$scope.$on('edit', function (event, arg) {
 					$scope.event = arg;
 
-					$scope.editMode = true;
-
-
-					$scope.event.description = arg.desc;
 					$scope.file = arg.picture;
-					$scope.lat = arg.lat;
-					$scope.lng = arg.lng;
-					$scope.lat = arg.lat;
+
+					$scope.editMode = true;
 
 					$scope.typeList = [ {
 							"descEn" :"Entrave à la circulation",
@@ -200,8 +198,6 @@
 						{
 							"descEn" : "Débris/Bris/Casse",
 							"descFr" : "Débris/Bris/Casse",
-								"descEn" :"Entrave à la circulation",
-						"descFr" : "Entrave à la circulation",
 						"uuid": "UUID2"
 						},
 						 {

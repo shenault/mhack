@@ -13,7 +13,12 @@
 			'GoogleUtils',
 			'ZapUtils',
 			'NgMap',
-			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils,NgMap) {
+			'ENV',
+			'$firebaseArray',
+			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils,NgMap, ENV, $firebaseArray) {
+
+				var ref = new Firebase(ENV.dbHost + "/item");
+				$scope.events = $firebaseArray(ref);
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();
@@ -137,19 +142,6 @@
 
 				$scope.setupScope();
 
-				$scope.showItemsNearMe = function(lat, lng) {
-					if ($scope.showItems) {
-						$scope.events = null;
-					} else {
-						var distance = GoogleUtils.getDistanceFromLatLonInMeter($scope.map.getBounds().R.R, $scope.map.getBounds().j.R, $scope.map.getBounds().R.j, $scope.map.getBounds().j.j);
-						if (lat) {
-							$scope.events = GoogleUtils.getItemListNearMe(lat, lng, distance);
-						} else {
-							$scope.events = GoogleUtils.getItemListNearMe($scope.lat, $scope.lng, distance);
-						}
-					}
-				};
-
 				$scope.showZap = function() {
 					if ($scope.showZapSpot) {
 						$scope.zaps = ZapUtils.getZapAccessPoint();
@@ -205,13 +197,6 @@
 
 				NgMap.getMap().then(function(map) {
 					$scope.map = map;
-					google.maps.event.addListener(map, 'dragend', function() {
-						var self = this;
-						setTimeout(function() {
-							$scope.showItemsNearMe(self.getCenter().lat(), self.getCenter().lng());
-							$scope.$digest();
-						}, 500);
-					});
 				});
 
 				$scope.getLocation();

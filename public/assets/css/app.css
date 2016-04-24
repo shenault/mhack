@@ -52,7 +52,11 @@ body, html {
 }
 
 .social-button {
-	margin-top: 15px;
+	margin-top: 16px;
+}
+
+.user-name {
+	margin-right: 16px;
 }
 
 .thumb {
@@ -60,4 +64,19 @@ body, html {
     height: 280px;
     float: none;
     position: relative;
+}
+
+
+.collaboratio-logo {
+    width: auto;
+    height: 30px;
+}
+
+.collaboratio-signature {
+    width: auto;
+    height: 60px;
+}
+
+.collaboratio-signature:hover {
+    cursor:hand;
 }

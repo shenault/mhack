@@ -51,8 +51,8 @@
 					</md-select>
 				</md-input-container>
 				<img id="thumbImage" ng-show="file" ngf-thumbnail="file" class="thumb" />
-				<button ng-click="close()" ng-show="file && !editMode">Remove</button>
-				<button type="file" ngf-select="updateLocationName()" ng-model="file"
+				<button ng-click="close()" ng-show="file && !editMode">{{ 'remove' | translate }}</button>
+				<button type="file" ngf-select="initImageLocation();" ng-model="file"
 						accept="image/*" ngf-max-size="10MB" ng-disabled="editMode"
 						ng-show="!file">{{'uploadImage' | translate}}</button>
 				<md-input-container class="md-block">

@@ -14,6 +14,63 @@
             'GoogleUtils',
 			'$translate',
 			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV, GoogleUtils, $translate) {
+
+				$scope.imageLocation = {};
+				$scope.gpsLocation = {};
+
+				$scope.initImageLocation = function(){
+					if ($scope.file) {
+						var latGpsRef, latGps, lngGpsRef, lngGps;
+
+						EXIF.getData($scope.file, function() {
+							latGpsRef = EXIF.getTag(this, "GPSLatitudeRef");
+							latGps = EXIF.getTag(this, "GPSLatitude");
+							lngGpsRef = EXIF.getTag(this, "GPSLongitudeRef");
+							lngGps = EXIF.getTag(this, "GPSLongitude");
+							$scope.imageLocation.lat = $scope.getGPSDecimal(latGps, latGpsRef);
+							$scope.imageLocation.lng = $scope.getGPSDecimal(lngGps, lngGpsRef);
+							$scope.updateLocationName();
+						});
+					}
+				};
+
+				$scope.initGpsLocation = function (){
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition($scope.setGpsPosition, $scope.showError);
+					}
+					else {
+						$scope.error = "Geolocation is not supported by this browser.";
+						$scope.gpsLocation.lat = null;
+						$scope.gpsLocation.lng = null;
+					}
+				};
+
+				$scope.showError = function (error) {
+					switch (error.code) {
+						case error.PERMISSION_DENIED:
+							$scope.error = "User denied the request for Geolocation.";
+							break;
+						case error.POSITION_UNAVAILABLE:
+							$scope.error = "Location information is unavailable.";
+							break;
+						case error.TIMEOUT:
+							$scope.error = "The request to get user location timed out.";
+							break;
+						case error.UNKNOWN_ERROR:
+							$scope.error = "An unknown error occurred.";
+							break;
+					}
+					$scope.gpsLocation.lat = null;
+					$scope.gpsLocation.lng = null;
+					$scope.$apply();
+				};
+
+				$scope.setGpsPosition = function (position) {
+					$scope.gpsLocation.lat = position.coords.latitude;
+					$scope.gpsLocation.lng = position.coords.longitude;
+					$scope.updateLocationName();
+				};
+
 				$scope.close = function(inSaving) {
 					$mdSidenav('addEventSideNav').close();
 					$scope.editMode = false;
@@ -33,7 +90,7 @@
 				};
 
 				$scope.save = function() {
-					$scope.getLocation();
+					$scope.initGpsLocation();
 					$scope.uploadFile($scope.saveCallback);
 					$scope.close(true);
 				};
@@ -57,7 +114,8 @@
 				$scope.setupScope = function() {
 					$scope.editMode = false;
 					$scope.flushData();
-					$scope.getLocation();
+					$scope.initGpsLocation();
+					$scope.initImageLocation();
 				};
 
 				$scope.flushData = function() {
@@ -65,26 +123,20 @@
 					$scope.event = null;
 					$scope.file = null;
 					$scope.picture = null;
-					$scope.latGpsRef = null;
-					$scope.latGps = null;
-					$scope.lngGpsRef = null;
-					$scope.lngGps = null;
-					$scope.lat = null;
-					$scope.lng = null;
+					$scope.imageLocation = {};
+					$scope.gpsLocation = {};
+					$scope.locationName = null;
 				};
 
 				$scope.updateLocationName = function() {
-					var locationName = GoogleUtils.geocodeLatLng($scope.lat, $scope.lng, $scope.locationName);
+					var locationName = GoogleUtils.geocodeLatLng($scope.getLat(), $scope.getLng(), $scope.locationName);
 				};
 
 				$scope.uploadFile = function(callback) {
 					if ($scope.file) {
+						$scope.initImageLocation();
 						EXIF.getData($scope.file, function() {
 							$scope.picture = null;
-							$scope.latGpsRef = EXIF.getTag(this, "GPSLatitudeRef");
-							$scope.latGps = EXIF.getTag(this, "GPSLatitude");
-							$scope.lngGpsRef = EXIF.getTag(this, "GPSLongitudeRef");
-							$scope.lngGps = EXIF.getTag(this, "GPSLongitude");
 							$scope.createdDate = EXIF.getTag(this, "DateTime");
 							$scope.picture = $scope.compressImage();
 							callback();
@@ -106,15 +158,23 @@
 				};
 
 				$scope.getLat = function() {
-					$scope.latGps = $scope.getGPSDecimal($scope.latGps, $scope.latGpsRef);
-					if ($scope.latGps) $scope.lat = $scope.latGps;
-					return $scope.lat;
+					if ($scope.imageLocation.lat != null) {
+						return $scope.imageLocation.lat;
+					} else if ($scope.gpsLocation.lat != null)  {
+						return $scope.gpsLocation.lat;
+					} else {
+						return null;
+					}
 				};
 
 				$scope.getLng = function() {
-					$scope.lngGps = $scope.getGPSDecimal($scope.lngGps, $scope.lngGpsRef);
-					if ($scope.lngGps) $scope.lng = $scope.lngGps;
-					return $scope.lng;
+					if ($scope.imageLocation.lng != null) {
+						return $scope.imageLocation.lng;
+					} else if ($scope.gpsLocation.lng != null)  {
+						return $scope.gpsLocation.lng;
+					} else {
+						return null;
+					}
 				};
 
 				$scope.getGPSDecimal = function(coordinate, ref) {
@@ -130,53 +190,6 @@
 					}
 				};
 
-				$scope.setPosition = function (position) {
-					$scope.lat = position.coords.latitude;
-					$scope.lng = position.coords.longitude;
-
-					$scope.updateLocationName();
-				};
-
-				$scope.showError = function (error) {
-					switch (error.code) {
-						case error.PERMISSION_DENIED:
-							$scope.error = "User denied the request for Geolocation.";
-							break;
-						case error.POSITION_UNAVAILABLE:
-							$scope.error = "Location information is unavailable.";
-							break;
-						case error.TIMEOUT:
-							$scope.error = "The request to get user location timed out.";
-							break;
-						case error.UNKNOWN_ERROR:
-							$scope.error = "An unknown error occurred.";
-							break;
-					}
-					$scope.lat = null;
-					$scope.lng = null;
-					$scope.$apply();
-				};
-
-				$scope.getLocation = function () {
-					if ($scope.file) {
-						EXIF.getData($scope.file, function() {
-							$scope.latGpsRef = EXIF.getTag(this, "GPSLatitudeRef");
-							$scope.latGps = EXIF.getTag(this, "GPSLatitude");
-							$scope.lngGpsRef = EXIF.getTag(this, "GPSLongitudeRef");
-							$scope.lngGps = EXIF.getTag(this, "GPSLongitude");
-						});
-					}
-
-					if (navigator.geolocation) {
-						navigator.geolocation.getCurrentPosition($scope.setPosition, $scope.showError);
-					}
-					else {
-						$scope.error = "Geolocation is not supported by this browser.";
-						$scope.lat = null;
-						$scope.lng = null;
-					}
-				};
-
 				$scope.setupScope();
 
 				/**
@@ -189,11 +202,15 @@
 						$scope.file = snapshot.val();
 					});
 
+					$scope.initGpsLocation();
+					$scope.initImageLocation();
 					$scope.editMode = true;
 				});
 
                 $scope.$on('addEvent', function (event, arg) {
 					$scope.event = {type: $scope.typeList[0]};
+					$scope.initGpsLocation();
+					$scope.initImageLocation();
                 });
 
 				$scope.$on('reverseGeocode', function (event, data) {

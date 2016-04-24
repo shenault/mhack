@@ -5,22 +5,11 @@
 	angular
 		.module('collaboratio.app')
 
-		.controller('MenuController', [
-			'$auth',
+		.controller('KmlController', [
 			'$scope',
-			'$state',
-			'$q',
 			'$window',
-			function($auth, $scope, $state, $q, $window) {
-				$scope.goToState = function(state) {
-					$scope.state = state;
-					$state.go(state);
-					$scope.menuOpened = false;
-				};
-
+			function($scope, $window) {
 				$scope.setupScope = function() {
-					$scope.state = 'eventReporter';
-					$scope.menuOpened = false;
 					$scope.isOpened = false;
 				};
 

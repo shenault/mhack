@@ -1,3 +1,11 @@
+<md-toolbar ng-show="!showSearch">
+	<div class="md-toolbar-tools">
+		<h2>
+			<span class="uppercase">{{'missionStatement' | translate}}</span>
+		</h2>
+	</div>
+</md-toolbar>
+
 <div class="login-section" layout="column">
-	<button class="zocial google social-button" ng-click="authenticate('google')">Sign in with google</button>
+	<md-button class="md-raised md-accent" ng-click="authenticate('google')">Sign in with google</md-button>
 </div>

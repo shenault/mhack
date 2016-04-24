@@ -19,6 +19,10 @@
 					$mdSidenav(menuId).toggle();
 				};
 
+				$scope.recenter = function() {
+					$scope.map.setCenter(new google.maps.LatLng($scope.lat, $scope.lng));
+				};
+
 				/**
 				 * https://snazzymaps.com/style/1/pale-dawn
 				 * */

@@ -3,6 +3,29 @@ body, html {
     width: 100%;
 }
 
+@media screen and (max-width:1295px) {
+    .bottom-left {
+        left: 2% !important;
+    }
+}
+
+@media screen and (min-width:1295px) and (max-width:1400px) {
+    .bottom-left {
+        left: 25% !important;
+    }
+}
+
+@media screen and (min-width:1400px) and (max-width:1600px) {
+    .bottom-left {
+        left: 20% !important;
+    }
+}
+
+.bottom-left {
+    position: absolute;
+    left: 15%;
+    bottom: 24px;
+}
 
 .bottom-right {
     position: fixed;

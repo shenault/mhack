@@ -70,3 +70,8 @@ body, html {
 .uppercase {
     text-transform: uppercase;
 }
+
+.md-button.md-icon-button.save-button {
+	padding-right: 0px;
+	margin-right: 0px;
+}

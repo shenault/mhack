@@ -20,9 +20,9 @@
 			<img src="assets/img/pin_me.png">
 		</div>
 	</custom-marker>
-	<kml-layer clickable="false" ng-if="showAireAmenagee" preserve-viewport="true" url="https://collaboratiohack.firebaseapp.com/assets/kml/aire-amenagee.kml?v=1234" ></kml-layer>
-	<kml-layer clickable="false" ng-if="showPistCyclable" preserve-viewport="true" url="https://collaboratiohack.firebaseapp.com/assets/kml/piste-cyclable.kml" ></kml-layer>
-	<kml-layer clickable="false" ng-if="showSentierPedestre" preserve-viewport="true" url="https://collaboratiohack.firebaseapp.com/assets/kml/sentier-pedestre.kmz" ></kml-layer>
+	<div ng-repeat="layer in kmlList">
+		<kml-layer clickable="false" ng-if="layer.visible" preserve-viewport="true" url="{{ layer.url }}" ></kml-layer>
+	</div>
 </ng-map>
 
 <div layout-align="end end" class="bottom-left">
@@ -33,14 +33,8 @@
 			</md-button>
 		</md-fab-trigger>
 		<md-fab-actions ng-show="isOpen">
-			<md-button aria-label="PisteCyclable" class="md-fab  md-raised md-mini" ng-style="{'background-color': showPistCyclable ?  'rgb(0,186,197)' : 'rgb(232,232,232)' }" ng-click="showPistCyclable = !showPistCyclable;" >
-				<md-icon md-svg-src="maps:ic_directions_bike_24px"></md-icon>
-			</md-button>
-			<md-button aria-label="AireAmenagee" class="md-fab md-raised md-mini" ng-style="{'background-color':showAireAmenagee ?  'rgb(215,223,35)' : 'rgb(232,232,232)' }" ng-click="showAireAmenagee = !showAireAmenagee;" >
-				<md-icon md-svg-icon="image:ic_nature_24px"></md-icon>
-			</md-button>
-			<md-button aria-label="SentierPedestre" class="md-fab md-raised md-mini" ng-style="{'background-color':showSentierPedestre ?  'rgb(28,117,188)' : 'rgb(232,232,232)' }" ng-click="showSentierPedestre = !showSentierPedestre;">
-				<md-icon md-svg-icon="maps:ic_directions_walk_24px"></md-icon>
+			<md-button ng-repeat="layer in kmlList" aria-label="{{ layer.title | translate }}" class="md-fab  md-raised md-mini" ng-style="{'background-color': layer.visible ?  'rgb(0,186,197)' : 'rgb(232,232,232)' }" ng-click="layer.visible = !layer.visible;" >
+				<md-icon md-svg-src="{{layer.icon}}"></md-icon>
 			</md-button>
 			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': showItems ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItems = !showItems;">
 				<md-icon md-svg-icon="alert:ic_error_24px"></md-icon>

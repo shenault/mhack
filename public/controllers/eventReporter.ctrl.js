@@ -28,23 +28,23 @@
 				$scope.kmlList = {
 					'aire-amenagee': {
 						'icon': 'image:ic_nature_24px',
-						'title': 'airesAmenagee',
-						'url': ENV.appUrl + '/assets/kml/aire-amenagee.kml?v=2',
+						'title': 'airesAmenagees',
+						'url': ENV.appUrl + '/assets/kml/aire-amenagee.kml?v=1',
 						'visible': false
 					},
 					'piste-cyclable': {
 						'icon': 'maps:ic_directions_bike_24px',
 						'title': 'pistesCyclables',
-						'url': ENV.appUrl +'/assets/kml/piste-cyclable.kml?v1',
+						'url': ENV.appUrl +'/assets/kml/piste-cyclable.kml?v=1',
 						'visible': false
 					},
 					'sentier-pedestre': {
 						'icon': 'maps:ic_directions_walk_24px',
 						'title': 'sentiersPedestres',
-						'url': ENV.appUrl + '/assets/kml/sentier-pedestre.kmz?v1',
+						'url': ENV.appUrl + '/assets/kml/sentier-pedestre.kmz?v=1',
 						'visible': false
 					}
-				}
+				};
 
 				$scope.toggleSidenav = function(menuId) {
 					$mdSidenav(menuId).toggle();

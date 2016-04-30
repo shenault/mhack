@@ -29,7 +29,10 @@
 					title: 'Hello',
 					type: 'Type',
 					uploadImage: 'Upload an image',
-					Emplacement: 'Location name'
+					Emplacement: 'Location name',
+					airesAmenagees: 'Designated areas',
+					pistesCyclables: 'Cycle paths',
+					sentiersPedestres: 'Walking trails',
 				});
 				$translateProvider.translations('fr', {
 					add : 'Ajouter',
@@ -54,7 +57,10 @@
 					title: 'Allo',
 					type: 'Type',
 					uploadImage: 'Téléverser une image',
-					Emplacement: 'Emplacement'
+					Emplacement: 'Emplacement',
+					airesAmenagees: 'Aires aménagées',
+					pistesCyclables: 'Pistes cyclables',
+					sentiersPedestres: 'Sentiers pédestres',
 				});
 
 				$translateProvider.preferredLanguage(locale.substring(0, 2));

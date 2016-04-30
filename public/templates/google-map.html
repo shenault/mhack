@@ -33,7 +33,7 @@
 			</md-button>
 		</md-fab-trigger>
 		<md-fab-actions ng-show="isOpen">
-			<md-button ng-repeat="layer in kmlList" aria-label="{{ layer.title }}" class="md-fab  md-raised md-mini" ng-style="{'background-color': layer.visible ?  'rgb(0,186,197)' : 'rgb(232,232,232)' }" ng-click="layer.visible = !layer.visible;" >
+			<md-button ng-repeat="layer in kmlList" aria-label="{{ layer.title | translate }}" class="md-fab  md-raised md-mini" ng-style="{'background-color': layer.visible ?  'rgb(0,186,197)' : 'rgb(232,232,232)' }" ng-click="layer.visible = !layer.visible;" >
 				<md-icon md-svg-src="{{layer.icon}}"></md-icon>
 			</md-button>
 			<md-button aria-label="NearMe" class="md-fab md-raised md-mini" ng-style="{'background-color': showItems ?  'rgb(240,78,52)' : 'rgb(232,232,232)'}" ng-click="showItems = !showItems;">

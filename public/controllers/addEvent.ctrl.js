@@ -11,14 +11,14 @@
 			'$rootScope',
 			'$mdSidenav',
 			'ENV',
-            'GoogleUtils',
+			'GoogleUtils',
 			'$translate',
-			function($firebaseArray, $scope, $rootScope, $mdSidenav,ENV, GoogleUtils, $translate) {
+			function($firebaseArray, $scope, $rootScope, $mdSidenav, ENV, GoogleUtils, $translate) {
 
 				$scope.imageLocation = {};
 				$scope.gpsLocation = {};
 
-				$scope.initImageLocation = function(){
+				$scope.initImageLocation = function() {
 					if ($scope.file) {
 						var latGpsRef, latGps, lngGpsRef, lngGps;
 
@@ -34,7 +34,7 @@
 					}
 				};
 
-				$scope.initGpsLocation = function (){
+				$scope.initGpsLocation = function() {
 					if (navigator.geolocation) {
 						navigator.geolocation.getCurrentPosition($scope.setGpsPosition, $scope.showError);
 					}
@@ -45,7 +45,7 @@
 					}
 				};
 
-				$scope.showError = function (error) {
+				$scope.showError = function(error) {
 					switch (error.code) {
 						case error.PERMISSION_DENIED:
 							$scope.error = "User denied the request for Geolocation.";
@@ -65,7 +65,7 @@
 					$scope.$apply();
 				};
 
-				$scope.setGpsPosition = function (position) {
+				$scope.setGpsPosition = function(position) {
 					$scope.gpsLocation.lat = position.coords.latitude;
 					$scope.gpsLocation.lng = position.coords.longitude;
 					$scope.updateLocationName();
@@ -100,7 +100,8 @@
 					if (!$scope.event.type) $scope.event.type = null;
 					if (!$scope.event.description) $scope.event.description = null;
 					var picture = $scope.refPicture.push($scope.picture);
-					$scope.events.$add({picture: picture.key(),
+					$scope.events.$add({
+						picture: picture.key(),
 						lat: $scope.getLat(),
 						lng: $scope.getLng(),
 						createdDate: $scope.createdDate,
@@ -150,17 +151,30 @@
 					var canvas = document.createElement('canvas');
 					var context = canvas.getContext('2d');
 
-					canvas.height = 280;
-					canvas.width = 280;
+					var width = document.getElementById('thumbImage').width;
+					var height = document.getElementById('thumbImage').height;
 
-					context.drawImage(document.getElementById('thumbImage'), 0, 0, 280, 280);
-					return	canvas.toDataURL("image/jpeg");
+					var finalWidth, finalHeight;
+
+					if (width > height) {
+						finalWidth = ENV.imgMaxSize;
+						finalHeight = height / width * finalWidth
+					} else {
+						finalHeight = ENV.imgMaxSize;
+						finalWidth = width / height * finalHeight;
+					}
+
+					canvas.width = finalWidth;
+					canvas.height = finalHeight;
+
+					context.drawImage(thumbImage, 0, 0, finalWidth, finalHeight);
+					return canvas.toDataURL("image/jpeg");
 				};
 
 				$scope.getLat = function() {
 					if ($scope.imageLocation.lat != null) {
 						return $scope.imageLocation.lat;
-					} else if ($scope.gpsLocation.lat != null)  {
+					} else if ($scope.gpsLocation.lat != null) {
 						return $scope.gpsLocation.lat;
 					} else {
 						return null;
@@ -170,7 +184,7 @@
 				$scope.getLng = function() {
 					if ($scope.imageLocation.lng != null) {
 						return $scope.imageLocation.lng;
-					} else if ($scope.gpsLocation.lng != null)  {
+					} else if ($scope.gpsLocation.lng != null) {
 						return $scope.gpsLocation.lng;
 					} else {
 						return null;
@@ -195,10 +209,10 @@
 				/**
 				 * SUBSCRIBERS
 				 */
-				$scope.$on('edit', function (event, arg) {
+				$scope.$on('edit', function(event, arg) {
 					$scope.event = arg;
 
-					$scope.refPicture.child(arg.picture).on("value", function (snapshot) {
+					$scope.refPicture.child(arg.picture).on("value", function(snapshot) {
 						$scope.file = snapshot.val();
 					});
 
@@ -207,14 +221,14 @@
 					$scope.editMode = true;
 				});
 
-                $scope.$on('addEvent', function (event, arg) {
+				$scope.$on('addEvent', function(event, arg) {
 					$scope.flushData();
 					$scope.event = {type: $scope.typeList[0]};
 					$scope.initGpsLocation();
 					$scope.initImageLocation();
-                });
+				});
 
-				$scope.$on('reverseGeocode', function (event, data) {
+				$scope.$on('reverseGeocode', function(event, data) {
 					$scope.locationName = data.locationName;
 				});
 			}]);

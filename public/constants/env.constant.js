@@ -6,8 +6,9 @@
 		.module('collaboratio.app')
 
 		.constant('ENV', {
+			appUrl: 'https://collaboratiohack.firebaseapp.com',
 			dbHost: 'https://collaboratiohack.firebaseio.com',
-			appUrl: 'https://collaboratiohack.firebaseapp.com'
+			imgMaxSize: 600,
 		});
 
 })(angular);

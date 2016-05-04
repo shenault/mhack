@@ -47,7 +47,7 @@ body, html {
 
 .thumb {
     width: 280px;
-    height: 280px;
+    height: auto;
     float: none;
     position: relative;
 }

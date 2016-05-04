@@ -52,11 +52,20 @@
 						</md-option>
 					</md-select>
 				</md-input-container>
-				<img id="thumbImage" ng-show="file" ngf-thumbnail="file" class="thumb" />
+				<img id="thumbImage" ng-show="file" ngf-src="file" class="thumb" />
+				<md-button
+						accept="image/*"
+						class="md-raised"
+						type="file"
+						ng-disabled="editMode"
+						ng-model="file"
+						ng-show="!file"
+						ngf-fix-orientation="true"
+						ngf-max-size="10MB"
+						ngf-select="initImageLocation();" >
+					{{'uploadImage' | translate}}
+				</md-button>
 				<md-button class="md-raised" ng-click="close()" ng-show="file && !editMode">{{ 'remove' | translate }}</md-button>
-				<md-button class="md-raised" type="file" ngf-select="initImageLocation();" ng-model="file"
-						accept="image/*" ngf-max-size="10MB" ng-disabled="editMode"
-						ng-show="!file">{{'uploadImage' | translate}}</md-button>
 				<md-input-container class="md-block">
 					<label>{{'description' | translate}}</label>
 					<textarea ng-model="event.description" ng-disabled="editMode" md-maxlength="150" rows="5" md-select-on-focus></textarea>

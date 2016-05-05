@@ -8,6 +8,7 @@
 		.constant('ENV', {
 			appUrl: 'https://collaboratiohack.firebaseapp.com',
 			dbHost: 'https://collaboratiohack.firebaseio.com',
+			enableGroupManager: false,
 			imgMaxSize: 600,
 		});
 

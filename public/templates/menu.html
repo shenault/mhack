@@ -17,7 +17,7 @@
 			</md-list-item>
 
 			<div ng-if="!$state.includes('login')">
-				<md-list-item class="md-2-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
+				<md-list-item ng-if="groupManagerEnabled" class="md-2-line" ng-class="(state == 'groupManager' ? 'menu-selected' : '')" ng-click="goToState('groupManager')">
 					<md-icon class="list-icon" md-svg-icon="action:ic_settings_24px"></md-icon><p>{{'menu.groupManager' | translate}}</p>
 				</md-list-item>
 				<md-divider></md-divider>

@@ -6,6 +6,7 @@
 		.module('collaboratio.app')
 
 		.controller('MenuController', [
+			'ENV',
 			'$auth',
 			'$scope',
 			'$rootScope',
@@ -13,8 +14,10 @@
 			'$q',
 			'$window',
 			'$mdSidenav',
-			function($auth, $scope,$rootScope, $state, $q, $window, $mdSidenav) {
-				$scope.$state= $state;
+			function(ENV, $auth, $scope, $rootScope, $state, $q, $window, $mdSidenav) {
+				$scope.$state = $state;
+
+				$scope.groupManagerEnabled = ENV.enableGroupManager;
 
 				$scope.goToState = function(state) {
 					$scope.state = state;
@@ -33,17 +36,17 @@
 				};
 
 				angular.element($window).bind('resize', function() {
-					setTimeout(function(){
-						if((window.innerHeight <= 700)  && ($window.innerWidth / $window.innerHeight) > 1) {
-							$scope.direction ="right";
+					setTimeout(function() {
+						if ((window.innerHeight <= 700) && ($window.innerWidth / $window.innerHeight) > 1) {
+							$scope.direction = "right";
 						} else {
 							$scope.direction = "up";
 						}
 						$scope.$digest();
-					},100)
+					}, 100)
 				});
 
-				$scope.reportEvent = function(){
+				$scope.reportEvent = function() {
 					$rootScope.$broadcast('addEvent', {});
 					$mdSidenav('addEventSideNav').toggle();
 				};

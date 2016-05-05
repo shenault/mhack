@@ -85,7 +85,8 @@
 				};
 
 				$scope.resolve = function() {
-					$scope.events.$remove($scope.event);
+					$scope.event.resolved = 1 ;
+					$scope.events.$save($scope.event);
 					$scope.close();
 				};
 
@@ -107,7 +108,8 @@
 						createdDate: $scope.createdDate,
 						type: $scope.event.type,
 						description: $scope.event.description,
-						reportCount: 1
+						reportCount: 1,
+						resolved: 0,
 					});
 					$scope.flushData();
 				};

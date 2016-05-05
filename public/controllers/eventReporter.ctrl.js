@@ -19,9 +19,11 @@
 			function($scope, $rootScope, $mdSidenav, $window, GoogleUtils, ZapUtils,NgMap, ENV, $firebaseArray, user) {
 
 				var ref = new Firebase(ENV.dbHost + "/item");
+				var query = ref.orderByChild("resolved").equalTo(0);
+
 				$scope.refPicture = new Firebase(ENV.dbHost + "/picture");
 				$scope.typeList = $firebaseArray(new Firebase(ENV.dbHost + "/type"));
-				$scope.events = $firebaseArray(ref);
+				$scope.events = $firebaseArray(query);
 
 				$scope.user = user;
 

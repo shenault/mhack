@@ -44,13 +44,17 @@
 				</div>
 			</md-toolbar>
 			<md-content layout-padding layout="column">
-				<md-input-container>
+				<md-input-container ng-show="!editMode">
 					<label>{{'type' | translate}}</label>
 					<md-select ng-model="event.type" ng-disabled="editMode" required>
 						<md-option ng-repeat="type in typeList" ng-value="type">
 							{{language == 'fr'  ? type.descFr : type.descEn }}
 						</md-option>
 					</md-select>
+				</md-input-container>
+				<md-input-container ng-show="editMode">
+					<label>{{'type' | translate}}</label>
+					<input value="{{language == 'fr'  ? event.type.descFr : event.type.descEn }}" disabled>
 				</md-input-container>
 				<img id="thumbImage" ng-show="file" ngf-src="file" class="thumb" />
 				<md-button
